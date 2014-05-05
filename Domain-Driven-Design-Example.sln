@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E1D66D7A-EABA-48D4-AEC7-09F0E2DBD24B}"
+	ProjectSection(SolutionItems) = preProject
+		eCommerce-Sample.vsmdi = eCommerce-Sample.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCommerce.WebService", "eCommerce.WebService\eCommerce.WebService.csproj", "{C1BBF5A7-F217-4F2E-9F64-AC9DC335463E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCommerce.Tests", "eCommerce.Tests\eCommerce.Tests.csproj", "{6743BD1D-A0C5-4C1C-9F17-15091F8A54D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCommerce", "eCommerce\eCommerce.csproj", "{572BF56A-2982-4143-B5F8-0445D557050B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C1BBF5A7-F217-4F2E-9F64-AC9DC335463E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1BBF5A7-F217-4F2E-9F64-AC9DC335463E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1BBF5A7-F217-4F2E-9F64-AC9DC335463E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1BBF5A7-F217-4F2E-9F64-AC9DC335463E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6743BD1D-A0C5-4C1C-9F17-15091F8A54D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6743BD1D-A0C5-4C1C-9F17-15091F8A54D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6743BD1D-A0C5-4C1C-9F17-15091F8A54D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6743BD1D-A0C5-4C1C-9F17-15091F8A54D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{572BF56A-2982-4143-B5F8-0445D557050B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{572BF56A-2982-4143-B5F8-0445D557050B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{572BF56A-2982-4143-B5F8-0445D557050B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{572BF56A-2982-4143-B5F8-0445D557050B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = eCommerce-Sample.vsmdi
+	EndGlobalSection
+EndGlobal

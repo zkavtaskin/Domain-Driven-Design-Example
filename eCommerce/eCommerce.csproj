@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{572BF56A-2982-4143-B5F8-0445D557050B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>eCommerce</RootNamespace>
+    <AssemblyName>eCommerce</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=3.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4, Version=3.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.2.1\lib\net40-client\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\packages\Castle.Windsor.3.2.1\lib\net40\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationLayer\Carts\CartService.cs" />
+    <Compile Include="ApplicationLayer\Carts\CheckOutResultDto.cs" />
+    <Compile Include="ApplicationLayer\Carts\ICartService.cs" />
+    <Compile Include="ApplicationLayer\Carts\CartDto.cs" />
+    <Compile Include="ApplicationLayer\Carts\CartProductDto.cs" />
+    <Compile Include="ApplicationLayer\Customers\CreditCardDto.cs" />
+    <Compile Include="ApplicationLayer\Customers\CustomerDto.cs" />
+    <Compile Include="ApplicationLayer\Customers\CustomerService.cs" />
+    <Compile Include="ApplicationLayer\Customers\ICustomerService.cs" />
+    <Compile Include="ApplicationLayer\Map.cs" />
+    <Compile Include="ApplicationLayer\Products\IProductService.cs" />
+    <Compile Include="ApplicationLayer\Products\ProductDto.cs" />
+    <Compile Include="ApplicationLayer\Products\ProductService.cs" />
+    <Compile Include="DomainModelLayer\Tax\Entity\CountryTax.cs" />
+    <Compile Include="DomainModelLayer\Tax\Enum\TaxType.cs" />
+    <Compile Include="DomainModelLayer\Tax\Spec\CountryTypeOfTaxSpec.cs" />
+    <Compile Include="Helpers\Domain\IDomainService.cs" />
+    <Compile Include="Helpers\Specification\And.cs" />
+    <Compile Include="Helpers\Specification\IExtensions.cs" />
+    <Compile Include="Helpers\Specification\ISpecification.cs" />
+    <Compile Include="Helpers\Specification\Negate.cs" />
+    <Compile Include="Helpers\Specification\Or.cs" />
+    <Compile Include="DomainModelLayer\Carts\Entity\Cart.cs" />
+    <Compile Include="DomainModelLayer\Carts\Spec\ProductInCartSpec.cs" />
+    <Compile Include="DomainModelLayer\Carts\Value\CartProduct.cs" />
+    <Compile Include="DomainModelLayer\Countries\Entity\Country.cs" />
+    <Compile Include="DomainModelLayer\Customers\Entity\Customer.cs" />
+    <Compile Include="DomainModelLayer\Carts\Enum\CheckOutIssue.cs" />
+    <Compile Include="DomainModelLayer\Customers\Enum\PaymentIssue.cs" />
+    <Compile Include="DomainModelLayer\Customers\Event\CustomerCheckedOutHandle.cs" />
+    <Compile Include="DomainModelLayer\Customers\Event\CustomerCheckOut.cs" />
+    <Compile Include="DomainModelLayer\Customers\Event\CustomerChangedEmail.cs" />
+    <Compile Include="DomainModelLayer\Customers\Event\CustomerCreated.cs" />
+    <Compile Include="DomainModelLayer\Customers\Event\CustomerCreatedHandle.cs" />
+    <Compile Include="DomainModelLayer\Customers\Spec\CreditCardAvailableSpec.cs" />
+    <Compile Include="DomainModelLayer\Customers\Spec\CustomerRegisteredSpec.cs" />
+    <Compile Include="DomainModelLayer\Customers\Spec\CustomerPurchasedNProductsSpec.cs" />
+    <Compile Include="DomainModelLayer\Customers\Spec\CustomerAlreadyRegisteredSpec.cs" />
+    <Compile Include="DomainModelLayer\Customers\Spec\CustomerRecentlyRegisteredSpec.cs" />
+    <Compile Include="DomainModelLayer\Customers\Value\CreditCard.cs" />
+    <Compile Include="DomainModelLayer\Email\EmailTemplate.cs" />
+    <Compile Include="DomainModelLayer\Email\IEmailDispatcher.cs" />
+    <Compile Include="DomainModelLayer\Email\IEmailGenerator.cs" />
+    <Compile Include="DomainModelLayer\Newsletter\INewsletterSubscriber.cs" />
+    <Compile Include="DomainModelLayer\Products\Entity\Product.cs" />
+    <Compile Include="DomainModelLayer\Products\Enum\ProductIssue.cs" />
+    <Compile Include="DomainModelLayer\Products\Enum\ReturnReason.cs" />
+    <Compile Include="DomainModelLayer\Products\Spec\ProductIsInStockSpec.cs" />
+    <Compile Include="DomainModelLayer\Products\Spec\ProductReturnReasonSpec.cs" />
+    <Compile Include="DomainModelLayer\Products\Entity\ProductCode.cs" />
+    <Compile Include="DomainModelLayer\Products\Value\Return.cs" />
+    <Compile Include="DomainModelLayer\Purchases\Entity\Purchase.cs" />
+    <Compile Include="DomainModelLayer\Purchases\Value\PurchasedProduct.cs" />
+    <Compile Include="DomainModelLayer\Services\ITaxService.cs" />
+    <Compile Include="DomainModelLayer\Services\TaxService.cs" />
+    <Compile Include="DomainModelLayer\Settings.cs" />
+    <Compile Include="InfrastructureLayer\StubDataCountryTaxRepository.cs" />
+    <Compile Include="InfrastructureLayer\MemoryUnitOfWork.cs" />
+    <Compile Include="InfrastructureLayer\StubDataCustomerRepository.cs" />
+    <Compile Include="InfrastructureLayer\StubDataProductRepository.cs" />
+    <Compile Include="InfrastructureLayer\StubDataProductCodeRepository.cs" />
+    <Compile Include="InfrastructureLayer\StubDataCountryRepository.cs" />
+    <Compile Include="InfrastructureLayer\MemoryRepository.cs" />
+    <Compile Include="InfrastructureLayer\SmtpEmailDispatcher.cs" />
+    <Compile Include="Helpers\Domain\DomainEvents.cs" />
+    <Compile Include="Helpers\Domain\Handle.cs" />
+    <Compile Include="Helpers\Domain\IDomainEntity.cs" />
+    <Compile Include="Helpers\Domain\IDomainEvent.cs" />
+    <Compile Include="InfrastructureLayer\WSNewsletterSubscriber.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Helpers\Repository\IRepository.cs" />
+    <Compile Include="Helpers\Repository\IUnitOfWork.cs" />
+    <Compile Include="Helpers\Specification\SpecificationBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ApplicationLayer\Diagram.cd" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

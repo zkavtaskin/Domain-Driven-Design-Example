@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.AspNet.WebApi.Tracing</id>
+    <version>4.0.30506</version>
+    <title>Microsoft ASP.NET Web API Tracing</title>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <licenseUrl>http://www.microsoft.com/web/webpi/eula/aspnet_and_web_tools_2012_2_rtw_eula_enu.htm</licenseUrl>
+    <projectUrl>http://www.asp.net/web-api</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>Enables ASP.NET Web API tracing using System.Diagnostics.</description>
+    <language>en-US</language>
+    <tags>Microsoft AspNet WebApi AspNetWebApi Diagnostics Tracing</tags>
+    <dependencies>
+      <dependency id="Microsoft.AspNet.WebApi.Core" version="4.0.20710.0" />
+    </dependencies>
+  </metadata>
+</package>
