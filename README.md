@@ -3,7 +3,7 @@ Domain-Driven-Design-Example C#
 
 **Repository objective:** To supplement blog articles on DDD (see below) and create easy to follow Domain-driven design repository that makes sense (if it still makes no sense then please do let me know). 
 
-Please do note that this is not a final solution and should be used for theoretical / educational purposes only. 
+Please do note that this is my interpretation of Domain-driven design (i.e. biased). Please use this for theoretical / educational purposes only. 
 
 ###Articles
 
