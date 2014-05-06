@@ -3,7 +3,7 @@ Domain-Driven-Design-Example C#
 
 **Repository objective:** To supplement blog articles on DDD (see below) and create easy to follow Domain-driven design repository that makes sense (if it still makes no sense then please do let me know). 
 
-Please do note that this is not a final solution and should be used for educational purposes only. 
+Please do note that this is not a final solution and should be used for theoretical / educational purposes only. 
 
 ###Articles
 
@@ -47,7 +47,7 @@ To keep things simple I have created in memory repository with few saved items. 
 
 ####Customer
 
-Customer already exists (John Smith, with ID: 5D5020DA-47DF-4C82-A722-C8DEAF06AE23).
+Customer already exists (John Smith, ID: 5D5020DA-47DF-4C82-A722-C8DEAF06AE23).
 
 But if you would like to add my customers here are urls that you can call.
 
@@ -65,7 +65,7 @@ api/customer/update?id=5D5020DA-47DF-4C82-A722-C8DEAF06AE23&Email=smith.john@mic
 
 ####Product
 
-Product already exists (iPhone, with ID: 65D03D7E-E41A-49BC-8680-DC942BABD10A).
+Product already exists (iPhone,  ID: 65D03D7E-E41A-49BC-8680-DC942BABD10A).
 
 But if you would like to add more products here are urls that you can call.
 
