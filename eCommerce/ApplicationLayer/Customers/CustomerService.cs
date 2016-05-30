@@ -150,7 +150,7 @@ namespace eCommerce.ApplicationLayer.Customers
         public List<CustomerPurchaseHistoryDto> GetAllCustomerPurchaseHistoryV2()
         {
             IEnumerable<CustomerPurchaseHistoryReadModel> customersPurchaseHistory =
-                this.customerRepository.GetCustomerPurchaseHistory();
+                this.customerRepository.GetCustomersPurchaseHistory();
 
             return AutoMapper.Mapper.Map<IEnumerable<CustomerPurchaseHistoryReadModel>, List<CustomerPurchaseHistoryDto>>(customersPurchaseHistory);
         }

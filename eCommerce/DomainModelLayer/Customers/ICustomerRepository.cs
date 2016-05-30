@@ -9,6 +9,6 @@ namespace eCommerce.DomainModelLayer.Customers
 {
     public interface ICustomerRepository : IRepository<Customer>
     {
-        IEnumerable<CustomerPurchaseHistoryReadModel> GetCustomerPurchaseHistory();
+        IEnumerable<CustomerPurchaseHistoryReadModel> GetCustomersPurchaseHistory();
     }
 }

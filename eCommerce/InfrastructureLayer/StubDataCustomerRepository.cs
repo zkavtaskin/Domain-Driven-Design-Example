@@ -51,7 +51,7 @@ namespace eCommerce.InfrastructureLayer
             this.memRepository.Remove(entity);
         }
 
-        public IEnumerable<CustomerPurchaseHistoryReadModel> GetCustomerPurchaseHistory()
+        public IEnumerable<CustomerPurchaseHistoryReadModel> GetCustomersPurchaseHistory()
         {
             //Here you either call a SQL view, do HQL joins, etc.
             //This returns your read model
