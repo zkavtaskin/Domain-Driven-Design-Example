@@ -27,6 +27,7 @@ namespace eCommerce.ApplicationLayer
             Mapper.CreateMap<CreditCard, CreditCardDto>();
             Mapper.CreateMap<Customer, CustomerDto>();
             Mapper.CreateMap<Product, ProductDto>();
+            Mapper.CreateMap<CustomerPurchaseHistoryReadModel, CustomerPurchaseHistoryDto>();
         }
     }
 }

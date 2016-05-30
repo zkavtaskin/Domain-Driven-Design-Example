@@ -21,7 +21,7 @@ namespace eCommerce.DomainModelLayer.Customers
         {
             get
             {
-                return customer => customer.Purchases.Count == this.nPurchases
+                return customer => customer.Purchases.Count >= this.nPurchases
                     && customer.Active;
             }
         }

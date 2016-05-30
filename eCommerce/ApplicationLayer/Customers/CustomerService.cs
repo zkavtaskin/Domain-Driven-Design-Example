@@ -9,13 +9,13 @@ using eCommerce.DomainModelLayer.Countries;
 
 namespace eCommerce.ApplicationLayer.Customers
 {
-    public class CustomerService : ICustomerService 
+    public class CustomerService : ICustomerService
     {
-        readonly IRepository<Customer> customerRepository;
+        readonly ICustomerRepository customerRepository;
         readonly IRepository<Country> countryRepository;
         readonly IUnitOfWork unitOfWork;
 
-        public CustomerService(IRepository<Customer> customerRepository, 
+        public CustomerService(ICustomerRepository customerRepository,
             IRepository<Country> countryRepository, IUnitOfWork unitOfWork)
         {
             this.customerRepository = customerRepository;
@@ -109,8 +109,8 @@ namespace eCommerce.ApplicationLayer.Customers
             if (customer == null)
                 throw new Exception("No such customer exists");
 
-            CreditCard creditCard = 
-                CreditCard.Create(customer, creditCardDto.NameOnCard, 
+            CreditCard creditCard =
+                CreditCard.Create(customer, creditCardDto.NameOnCard,
                 creditCardDto.CardNumber, creditCardDto.Expiry);
 
             customer.Add(creditCard);
@@ -118,6 +118,41 @@ namespace eCommerce.ApplicationLayer.Customers
             this.unitOfWork.Commit();
 
             return AutoMapper.Mapper.Map<CreditCard, CreditCardDto>(creditCard);
+        }
+
+        //Approach 1 - Domain Model DTO Projection 
+        public List<CustomerPurchaseHistoryDto> GetAllCustomerPurchaseHistoryV1()
+        {
+            IEnumerable<Customer> customers =
+                 this.customerRepository.Find(new CustomerPurchasedNProductsSpec(1));
+
+            List<CustomerPurchaseHistoryDto> customersPurchaseHistory =
+                new List<CustomerPurchaseHistoryDto>();
+
+            foreach (Customer customer in customers)
+            {
+                CustomerPurchaseHistoryDto customerPurchaseHistory = new CustomerPurchaseHistoryDto();
+                customerPurchaseHistory.CustomerId = customer.Id;
+                customerPurchaseHistory.FirstName = customer.FirstName;
+                customerPurchaseHistory.LastName = customer.LastName;
+                customerPurchaseHistory.Email = customer.Email;
+                customerPurchaseHistory.TotalPurchases = customer.Purchases.Count;
+                customerPurchaseHistory.TotalProductsPurchased =
+                    customer.Purchases.Sum(purchase => purchase.Products.Sum(product => product.Quantity));
+                customerPurchaseHistory.TotalCost = customer.Purchases.Sum(purchase => purchase.TotalCost);
+                customersPurchaseHistory.Add(customerPurchaseHistory);
+
+            }
+            return customersPurchaseHistory;
+        }
+
+        //Approach 2 - Infrastructure Read Model Projection 
+        public List<CustomerPurchaseHistoryDto> GetAllCustomerPurchaseHistoryV2()
+        {
+            IEnumerable<CustomerPurchaseHistoryReadModel> customersPurchaseHistory =
+                this.customerRepository.GetCustomerPurchaseHistory();
+
+            return AutoMapper.Mapper.Map<IEnumerable<CustomerPurchaseHistoryReadModel>, List<CustomerPurchaseHistoryDto>>(customersPurchaseHistory);
         }
     }
 }

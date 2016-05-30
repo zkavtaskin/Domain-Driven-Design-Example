@@ -68,12 +68,15 @@
     <Compile Include="ApplicationLayer\Carts\CartProductDto.cs" />
     <Compile Include="ApplicationLayer\Customers\CreditCardDto.cs" />
     <Compile Include="ApplicationLayer\Customers\CustomerDto.cs" />
+    <Compile Include="ApplicationLayer\Customers\CustomerPurchaseHistoryDto.cs" />
     <Compile Include="ApplicationLayer\Customers\CustomerService.cs" />
     <Compile Include="ApplicationLayer\Customers\ICustomerService.cs" />
     <Compile Include="ApplicationLayer\Map.cs" />
     <Compile Include="ApplicationLayer\Products\IProductService.cs" />
     <Compile Include="ApplicationLayer\Products\ProductDto.cs" />
     <Compile Include="ApplicationLayer\Products\ProductService.cs" />
+    <Compile Include="DomainModelLayer\Customers\CustomerPurchaseHistoryReadModel.cs" />
+    <Compile Include="DomainModelLayer\Customers\ICustomerRepository.cs" />
     <Compile Include="DomainModelLayer\Tax\CountryTax.cs" />
     <Compile Include="DomainModelLayer\Tax\TaxType.cs" />
     <Compile Include="DomainModelLayer\Tax\CountryTypeOfTaxSpec.cs" />

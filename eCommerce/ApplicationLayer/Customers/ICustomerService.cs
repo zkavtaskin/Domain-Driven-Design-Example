@@ -13,5 +13,8 @@ namespace eCommerce.ApplicationLayer.Customers
         void Remove(Guid customerId);
         CustomerDto Get(Guid customerId);
         CreditCardDto Add(Guid customerId, CreditCardDto creditCard);
+        List<CustomerPurchaseHistoryDto> GetAllCustomerPurchaseHistoryV1();
+
+        List<CustomerPurchaseHistoryDto> GetAllCustomerPurchaseHistoryV2();
     }
 }

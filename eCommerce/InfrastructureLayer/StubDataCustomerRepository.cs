@@ -10,7 +10,7 @@ using System.Text;
 
 namespace eCommerce.InfrastructureLayer
 {
-    public sealed class StubDataCustomerRepository : IRepository<Customer>
+    public sealed class StubDataCustomerRepository : ICustomerRepository
     {
         readonly MemoryRepository<Customer> memRepository;
 
@@ -49,6 +49,13 @@ namespace eCommerce.InfrastructureLayer
         public void Remove(Customer entity)
         {
             this.memRepository.Remove(entity);
+        }
+
+        public IEnumerable<CustomerPurchaseHistoryReadModel> GetCustomerPurchaseHistory()
+        {
+            //Here you either call a SQL view, do HQL joins, etc.
+            //This returns your read model
+            throw new NotImplementedException();
         }
     }
 }
