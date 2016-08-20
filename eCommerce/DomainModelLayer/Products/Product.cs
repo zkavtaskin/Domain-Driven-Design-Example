@@ -30,9 +30,14 @@ namespace eCommerce.DomainModelLayer.Products
 
         public static Product Create(string name, int quantity, decimal cost, ProductCode productCode)
         {
+            return Create(Guid.NewGuid(), name, quantity, cost, productCode);
+        }
+
+        public static Product Create(Guid id, string name, int quantity, decimal cost, ProductCode productCode)
+        {
             return new Product()
             {
-                Id = Guid.NewGuid(),
+                Id = id,
                 Name = name,
                 Quantity = quantity,
                 Created = DateTime.Now,
@@ -41,13 +46,6 @@ namespace eCommerce.DomainModelLayer.Products
                 Cost = cost,
                 Code = productCode
             };
-        }
-
-        public static Product Create(Guid id, string name, int quantity, decimal cost, ProductCode productCode)
-        {
-            Product product = Create(name, quantity, cost, productCode);
-            product.Id = id;
-            return product;
         }
     }
 }

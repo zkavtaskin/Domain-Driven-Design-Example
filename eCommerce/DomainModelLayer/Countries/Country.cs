@@ -13,18 +13,16 @@ namespace eCommerce.DomainModelLayer.Countries
 
         public static Country Create(string name)
         {
-            return new Country()
-            {
-                Id = Guid.NewGuid(),
-                Name = name
-            };
+            return Create(Guid.NewGuid(), name);
         }
 
         public static Country Create(Guid id, string name)
         {
-            Country country = Create(name);
-            country.Id = id;
-            return country;
+            return new Country()
+            {
+                Id = id,
+                Name = name
+            };
         }
     }
 }

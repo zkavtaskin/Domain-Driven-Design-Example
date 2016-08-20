@@ -42,12 +42,17 @@ namespace eCommerce.DomainModelLayer.Customers
 
         public static Customer Create(string firstname, string lastname, string email, Country country)
         {
+            return Create(Guid.NewGuid(), firstname, lastname, email, country); ;
+        }
+
+        public static Customer Create(Guid id, string firstname, string lastname, string email, Country country)
+        {
             if (string.IsNullOrEmpty(firstname))
                 throw new ArgumentNullException("firstname");
 
             if (string.IsNullOrEmpty(lastname))
                 throw new ArgumentNullException("lastname");
-            
+
             if (string.IsNullOrEmpty(email))
                 throw new ArgumentNullException("email");
 
@@ -56,7 +61,7 @@ namespace eCommerce.DomainModelLayer.Customers
 
             Customer customer = new Customer()
             {
-                Id = Guid.NewGuid(),
+                Id = id,
                 FirstName = firstname,
                 LastName = lastname,
                 Email = email,
@@ -64,16 +69,11 @@ namespace eCommerce.DomainModelLayer.Customers
                 Created = DateTime.Today,
                 Country = country
             };
-            customer.Cart = Cart.Create(customer);
 
             DomainEvents.Raise<CustomerCreated>(new CustomerCreated() { Customer = customer });
-            return customer;
-        }
 
-        public static Customer Create(Guid id, string firstname, string lastname, string email, Country country)
-        {
-            Customer customer = Create(firstname, lastname, email, country);
-            customer.Id = id;
+            customer.Cart = Cart.Create(customer);
+
             return customer;
         }
 

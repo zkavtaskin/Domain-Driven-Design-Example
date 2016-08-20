@@ -30,7 +30,7 @@ namespace eCommerce.WebService.App_Start.Installers
             container.Register(Component.For<IRepository<Country>>().ImplementedBy<StubDataCountryRepository>().LifestyleSingleton());
             container.Register(Component.For<IRepository<CountryTax>>().ImplementedBy<StubDataCountryTaxRepository>().LifestyleSingleton());
             container.Register(Component.For<IRepository<Product>>().ImplementedBy<StubDataProductRepository>().LifestyleSingleton());
-            container.Register(Component.For<IRepository<Customer>>().ImplementedBy<StubDataCustomerRepository>().LifestyleSingleton());
+            container.Register(Component.For<ICustomerRepository>().ImplementedBy<StubDataCustomerRepository>().LifestyleSingleton());
         }
     }
 }

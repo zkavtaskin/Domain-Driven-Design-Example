@@ -14,7 +14,12 @@ namespace eCommerce.Helpers.Domain
         [ThreadStatic] //so that each thread has its own callbacks
         private static List<Delegate> actions;
 
-        private static IWindsorContainer Container { get; set; } 
+        private static IWindsorContainer Container;
+
+        public static void Init(IWindsorContainer container)
+        {
+            Container = container;
+        }
 
         //Registers a callback for the given domain event, used for testing only
         public static void Register<T>(Action<T> callback) where T : IDomainEvent

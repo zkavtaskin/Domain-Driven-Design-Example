@@ -1,6 +1,7 @@
 ﻿using Castle.MicroKernel.Registration;
 using eCommerce.DomainModelLayer;
 using eCommerce.DomainModelLayer.Countries;
+using eCommerce.Helpers.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,8 @@ namespace eCommerce.WebService.App_Start.Installers
                 .Instance(new Settings(Country.Create(new Guid("229074BD-2356-4B5A-8619-CDEBBA71CC21"), "United Kingdom"))
                     )
                );
+
+            DomainEvents.Init(container);
         }
     }
 }

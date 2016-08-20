@@ -13,18 +13,16 @@ namespace eCommerce.DomainModelLayer.Products
 
         public static ProductCode Create(string name)
         {
-            return new ProductCode() 
-            {
-                Id = Guid.NewGuid(),
-                Name = name
-            };
+            return Create(Guid.NewGuid(), name);
         }
 
         public static ProductCode Create(Guid id, string name)
         {
-            ProductCode productCode = Create(name);
-            productCode.Id = id;
-            return productCode;
+            return new ProductCode()
+            {
+                Id = id,
+                Name = name
+            };
         }
     }
 }

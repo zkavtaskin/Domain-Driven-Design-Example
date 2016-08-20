@@ -16,20 +16,18 @@ namespace eCommerce.DomainModelLayer.Tax
 
         public static CountryTax Create(TaxType type, Country country, decimal percentage)
         {
-            return new CountryTax()
-            {
-                Id = Guid.NewGuid(),
-                Country = country,
-                Percentage = percentage,
-                Type = type
-            };
+            return Create(Guid.NewGuid(), type, country, percentage);
         }
 
         public static CountryTax Create(Guid id, TaxType type, Country country, decimal percentage)
         {
-            CountryTax countryTax = Create(type, country, percentage);
-            countryTax.Id = id;
-            return countryTax;
+            return new CountryTax()
+            {
+                Id = id,
+                Country = country,
+                Percentage = percentage,
+                Type = type
+            };
         }
     }
 }
