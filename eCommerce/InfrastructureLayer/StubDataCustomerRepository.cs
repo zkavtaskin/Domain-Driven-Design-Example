@@ -21,7 +21,7 @@ namespace eCommerce.InfrastructureLayer
             Customer customer = Customer.Create(new Guid("5D5020DA-47DF-4C82-A722-C8DEAF06AE23"), "john", "smith", "john.smith@microsoft.com",
                 Country.Create(new Guid("229074BD-2356-4B5A-8619-CDEBBA71CC21"), "United Kingdom"));
 
-            customer.Add(CreditCard.Create(customer, "MR J SMITH", 123122131, DateTime.Today.AddDays(1)));
+            customer.Add(CreditCard.Create(customer, "MR J SMITH", "123122131", DateTime.Today.AddDays(1)));
 
             this.memRepository.Add(customer);
         }

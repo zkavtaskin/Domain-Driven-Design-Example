@@ -18,11 +18,15 @@ namespace eCommerce.DomainModelLayer.Countries
 
         public static Country Create(Guid id, string name)
         {
-            return new Country()
+            Country country = new Country()
             {
                 Id = id,
                 Name = name
             };
+
+            DomainEvents.Raise<CountryCreated>(new CountryCreated() { Country = country });
+
+            return country;
         }
     }
 }

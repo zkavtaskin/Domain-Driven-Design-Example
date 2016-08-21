@@ -6,7 +6,7 @@ using System.Text;
 namespace eCommerce.Helpers.Domain
 {
     public interface Handles<T> 
-        where T : IDomainEvent
+        where T : DomainEvent
     {
         void Handle(T args); 
     } 

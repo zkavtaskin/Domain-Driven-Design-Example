@@ -75,9 +75,17 @@
     <Compile Include="ApplicationLayer\Products\IProductService.cs" />
     <Compile Include="ApplicationLayer\Products\ProductDto.cs" />
     <Compile Include="ApplicationLayer\Products\ProductService.cs" />
+    <Compile Include="DomainModelLayer\Carts\CartCreated.cs" />
+    <Compile Include="DomainModelLayer\Carts\ProductRemovedCart.cs" />
+    <Compile Include="DomainModelLayer\Carts\ProductAddedCart.cs" />
+    <Compile Include="DomainModelLayer\Countries\CountryCreated.cs" />
+    <Compile Include="DomainModelLayer\Customers\CreditCardAdded.cs" />
     <Compile Include="DomainModelLayer\Customers\CustomerPurchaseHistoryReadModel.cs" />
     <Compile Include="DomainModelLayer\Customers\ICustomerRepository.cs" />
+    <Compile Include="DomainModelLayer\Products\ProductCodeCreated.cs" />
+    <Compile Include="DomainModelLayer\Products\ProductCreated.cs" />
     <Compile Include="DomainModelLayer\Tax\CountryTax.cs" />
+    <Compile Include="DomainModelLayer\Tax\CountryTaxCreated.cs" />
     <Compile Include="DomainModelLayer\Tax\TaxType.cs" />
     <Compile Include="DomainModelLayer\Tax\CountryTypeOfTaxSpec.cs" />
     <Compile Include="Helpers\Domain\IDomainService.cs" />

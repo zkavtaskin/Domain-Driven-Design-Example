@@ -21,7 +21,7 @@ namespace eCommerce.Tests.DomainModelLayer
             //Instead use Mock to setup returns. Mock creates a proxy object against which we can validate.
             Mock<CreditCard> expected = new Mock<CreditCard>();
             expected.SetupGet(x => x.NameOnCard).Returns("MR J SMITH");
-            expected.SetupGet(x => x.CardNumber).Returns(293923910200292);
+            expected.SetupGet(x => x.CardNumber).Returns("293923910200292");
             expected.SetupGet(x => x.Active).Returns(true);
             expected.SetupGet(x => x.Created).Returns(DateTime.Today);
             expected.SetupGet(x => x.Expiry).Returns(DateTime.Today.AddDays(1));
@@ -29,7 +29,7 @@ namespace eCommerce.Tests.DomainModelLayer
 
             //call a method
             CreditCard actual = CreditCard.Create(new Customer(), "MR J SMITH",
-                293923910200292, DateTime.Today.AddDays(1));
+                "293923910200292", DateTime.Today.AddDays(1));
 
             //single assert thanks to fluent assertions framework
             actual.ShouldBeEquivalentTo(expected.Object);
@@ -40,7 +40,7 @@ namespace eCommerce.Tests.DomainModelLayer
         public void Create_ExpiredCreditCard_ThrowsException()
         {
             CreditCard actual = CreditCard.Create(new Customer(), "MR J SMITH",
-                293923910200292, DateTime.Today.AddDays(-1));
+                "293923910200292", DateTime.Today.AddDays(-1));
         }
 
         [TestMethod, TestCategory("Unit")]
@@ -53,7 +53,7 @@ namespace eCommerce.Tests.DomainModelLayer
                 CallBase = true
             };
 
-            creditCard.SetupGet(x => x.CardNumber).Returns(293923910200292);
+            creditCard.SetupGet(x => x.CardNumber).Returns("293923910200292");
             creditCard.SetupGet(x => x.Expiry).Returns(DateTime.Today.AddDays(1));
 
             Mock<Customer> customer = new Mock<Customer>();
@@ -62,28 +62,43 @@ namespace eCommerce.Tests.DomainModelLayer
 
             //cal
             CreditCard actual = CreditCard.Create(customer.Object, "MR J SMITH",
-                293923910200292, DateTime.Today.AddDays(1));
+                "293923910200292", DateTime.Today.AddDays(1));
         }
 
         [TestMethod, TestCategory("Unit")]
         [ExpectedException(typeof(Exception))]
         public void Create_CustomerIsNull_ThrowsException()
         {
-            CreditCard.Create(null, "MR J SMITH", 293923910200292, DateTime.Today.AddDays(1));
+            CreditCard.Create(null, "MR J SMITH", "293923910200292", DateTime.Today.AddDays(1));
         }
 
         [TestMethod, TestCategory("Unit")]
         [ExpectedException(typeof(Exception))]
         public void Create_NameIsNull_ThrowsException()
         {
-            CreditCard.Create(new Customer(), null, 293923910200292, DateTime.Today.AddDays(1));
+            CreditCard.Create(new Customer(), null, "293923910200292", DateTime.Today.AddDays(1));
         }
 
         [TestMethod, TestCategory("Unit")]
         [ExpectedException(typeof(Exception))]
-        public void Create_CardNumberIsZero_ThrowsException()
+        public void Create_CardNumberIsNull_ThrowsException()
         {
-            CreditCard.Create(new Customer(), "MR J SMITH", 0, DateTime.Today.AddDays(1));
+            CreditCard.Create(new Customer(), "MR J SMITH", null, DateTime.Today.AddDays(1));
+        }
+
+
+        [TestMethod, TestCategory("Unit")]
+        [ExpectedException(typeof(Exception))]
+        public void Create_CardNumberIsEmpty_ThrowsException()
+        {
+            CreditCard.Create(new Customer(), "MR J SMITH", string.Empty, DateTime.Today.AddDays(1));
+        }
+
+        [TestMethod, TestCategory("Unit")]
+        [ExpectedException(typeof(Exception))]
+        public void Create_CardNumberIsLessThen6_ThrowsException()
+        {
+            CreditCard.Create(new Customer(), "MR J SMITH", "12345", DateTime.Today.AddDays(1));
         }
     }
 }

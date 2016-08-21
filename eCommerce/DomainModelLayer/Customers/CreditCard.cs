@@ -9,13 +9,13 @@ namespace eCommerce.DomainModelLayer.Customers
     {
         public virtual Guid Id { get; protected set; }
         public virtual string NameOnCard { get; protected set; }
-        public virtual long CardNumber { get; protected set; }
+        public virtual string CardNumber { get; protected set; }
         public virtual bool Active { get; protected set; }
         public virtual DateTime Created { get; protected set; }
         public virtual DateTime Expiry { get; protected set; }
         public virtual Customer Customer { get; protected set; }
 
-        public static CreditCard Create(Customer customer, string name, long cardNum, DateTime expiry)
+        public static CreditCard Create(Customer customer, string name, string cardNum, DateTime expiry)
         {
             if (customer == null)
                 throw new Exception("Customer object can't be null");
@@ -23,7 +23,7 @@ namespace eCommerce.DomainModelLayer.Customers
             if (string.IsNullOrEmpty(name))
                 throw new Exception("Name can't be empty");
 
-            if (cardNum < 6)
+            if (string.IsNullOrEmpty(cardNum) || cardNum.Length < 6)
                 throw new Exception("Card number length is incorrect");
 
             if (DateTime.Now > expiry)

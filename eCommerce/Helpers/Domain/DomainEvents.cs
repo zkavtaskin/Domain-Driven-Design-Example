@@ -22,7 +22,7 @@ namespace eCommerce.Helpers.Domain
         }
 
         //Registers a callback for the given domain event, used for testing only
-        public static void Register<T>(Action<T> callback) where T : IDomainEvent
+        public static void Register<T>(Action<T> callback) where T : DomainEvent
         {
             if (actions == null)
                 actions = new List<Delegate>();
@@ -37,7 +37,7 @@ namespace eCommerce.Helpers.Domain
         }
 
         //Raises the given domain event
-        public static void Raise<T>(T args) where T : IDomainEvent
+        public static void Raise<T>(T args) where T : DomainEvent
         {
           if (Container != null)
               foreach (var handler in Container.ResolveAll<Handles<T>>())

@@ -20,7 +20,7 @@ namespace eCommerce.DomainModelLayer.Carts
 
         public virtual ReadOnlyCollection<CartProduct> Products
         {
-            get { return cartProducts.Where(x => x.Active).ToList().AsReadOnly(); }
+            get { return cartProducts.AsReadOnly(); }
         }
 
         public virtual Customer Customer { get; protected set; }
@@ -49,6 +49,9 @@ namespace eCommerce.DomainModelLayer.Carts
             Cart cart = new Cart();
             cart.Id = Guid.NewGuid();
             cart.Customer = customer;
+
+            DomainEvents.Raise<CartCreated>(new CartCreated() { Cart = cart });
+
             return cart;
         }
 
@@ -56,6 +59,8 @@ namespace eCommerce.DomainModelLayer.Carts
         {
             if (cartProduct == null)
                 throw new ArgumentNullException();
+
+            DomainEvents.Raise<ProductAddedCart>(new ProductAddedCart() { CartProduct = cartProduct });
 
             this.cartProducts.Add(cartProduct);
         }
@@ -68,7 +73,9 @@ namespace eCommerce.DomainModelLayer.Carts
             CartProduct cartProduct =
                 this.cartProducts.Find(new ProductInCartSpec(product).IsSatisfiedBy);
 
-            cartProduct.Active = false;
+            DomainEvents.Raise<ProductRemovedCart>(new ProductRemovedCart() { CartProduct = cartProduct });
+
+            this.cartProducts.Remove(cartProduct);
         }
 
         public virtual Nullable<ProductIssues> IsPurchaseReady()

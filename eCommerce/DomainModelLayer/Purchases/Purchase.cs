@@ -5,10 +5,11 @@ using System.Text;
 using System.Collections.ObjectModel;
 using eCommerce.DomainModelLayer.Customers;
 using eCommerce.DomainModelLayer.Carts;
+using eCommerce.Helpers.Domain;
 
 namespace eCommerce.DomainModelLayer.Purchases
 {
-    public class Purchase
+    public class Purchase : IDomainEntity
     {
         private List<PurchasedProduct> purchasedProducts = new List<PurchasedProduct>();
 

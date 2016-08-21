@@ -21,13 +21,17 @@ namespace eCommerce.DomainModelLayer.Tax
 
         public static CountryTax Create(Guid id, TaxType type, Country country, decimal percentage)
         {
-            return new CountryTax()
+            CountryTax countryTax = new CountryTax()
             {
                 Id = id,
                 Country = country,
                 Percentage = percentage,
                 Type = type
             };
+
+            DomainEvents.Raise<CountryTaxCreated>(new CountryTaxCreated() { CountryTax = countryTax });
+
+            return countryTax;
         }
     }
 }

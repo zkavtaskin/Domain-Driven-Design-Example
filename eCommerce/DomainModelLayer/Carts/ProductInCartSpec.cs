@@ -22,8 +22,7 @@ namespace eCommerce.DomainModelLayer.Carts
         {
             get
             {
-                return cartProduct => cartProduct.Product.Id == this.product.Id
-                    && cartProduct.Active;
+                return cartProduct => cartProduct.Product.Id == this.product.Id;
             }
         }
     }

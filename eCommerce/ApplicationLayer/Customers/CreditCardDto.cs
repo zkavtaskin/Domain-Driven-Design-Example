@@ -9,7 +9,7 @@ namespace eCommerce.ApplicationLayer.Customers
     {
         public Guid Id { get; set; }
         public string NameOnCard { get; set; }
-        public long CardNumber { get; set; }
+        public string CardNumber { get; set; }
         public DateTime Expiry { get; set; }
     }
 }

@@ -96,6 +96,8 @@ namespace eCommerce.DomainModelLayer.Customers
         public virtual void Add(CreditCard creditCard)
         {
             this.creditCards.Add(creditCard);
+
+            DomainEvents.Raise<CreditCardAdded>(new CreditCardAdded() { CreditCard = creditCard });
         }
 
         internal virtual void Add(Purchase purchase)

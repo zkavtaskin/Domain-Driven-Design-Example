@@ -35,7 +35,7 @@ namespace eCommerce.DomainModelLayer.Products
 
         public static Product Create(Guid id, string name, int quantity, decimal cost, ProductCode productCode)
         {
-            return new Product()
+            Product product = new Product()
             {
                 Id = id,
                 Name = name,
@@ -46,6 +46,10 @@ namespace eCommerce.DomainModelLayer.Products
                 Cost = cost,
                 Code = productCode
             };
+
+            DomainEvents.Raise<ProductCreated>(new ProductCreated() { Product = product });
+
+            return product;
         }
     }
 }
