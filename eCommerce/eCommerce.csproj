@@ -71,6 +71,12 @@
     <Compile Include="ApplicationLayer\Customers\CustomerPurchaseHistoryDto.cs" />
     <Compile Include="ApplicationLayer\Customers\CustomerService.cs" />
     <Compile Include="ApplicationLayer\Customers\ICustomerService.cs" />
+    <Compile Include="ApplicationLayer\History\CustomerFriendlyEventDto.cs" />
+    <Compile Include="ApplicationLayer\History\CustomerFriendlyHistoryDto.cs" />
+    <Compile Include="ApplicationLayer\History\EventDto.cs" />
+    <Compile Include="ApplicationLayer\History\HistoryDto.cs" />
+    <Compile Include="ApplicationLayer\History\HistoryService.cs" />
+    <Compile Include="ApplicationLayer\History\IHistoryService.cs" />
     <Compile Include="ApplicationLayer\Map.cs" />
     <Compile Include="ApplicationLayer\Products\IProductService.cs" />
     <Compile Include="ApplicationLayer\Products\ProductDto.cs" />
@@ -88,7 +94,10 @@
     <Compile Include="DomainModelLayer\Tax\CountryTaxCreated.cs" />
     <Compile Include="DomainModelLayer\Tax\TaxType.cs" />
     <Compile Include="DomainModelLayer\Tax\CountryTypeOfTaxSpec.cs" />
+    <Compile Include="Helpers\Domain\DomainEventHandle.cs" />
+    <Compile Include="Helpers\Domain\DomainEventRecord.cs" />
     <Compile Include="Helpers\Domain\IDomainService.cs" />
+    <Compile Include="Helpers\Repository\IDomainEventRepository.cs" />
     <Compile Include="Helpers\Specification\And.cs" />
     <Compile Include="Helpers\Specification\IExtensions.cs" />
     <Compile Include="Helpers\Specification\ISpecification.cs" />
@@ -128,6 +137,7 @@
     <Compile Include="DomainModelLayer\Services\ITaxService.cs" />
     <Compile Include="DomainModelLayer\Services\TaxService.cs" />
     <Compile Include="DomainModelLayer\Settings.cs" />
+    <Compile Include="InfrastructureLayer\MemDomainEventRepository.cs" />
     <Compile Include="InfrastructureLayer\StubDataCountryTaxRepository.cs" />
     <Compile Include="InfrastructureLayer\MemoryUnitOfWork.cs" />
     <Compile Include="InfrastructureLayer\StubDataCustomerRepository.cs" />

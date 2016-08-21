@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using eCommerce.ApplicationLayer.Carts;
 using eCommerce.ApplicationLayer.Customers;
+using eCommerce.ApplicationLayer.History;
 using eCommerce.ApplicationLayer.Products;
 using eCommerce.DomainModelLayer.Carts;
 using eCommerce.DomainModelLayer.Customers;
 using eCommerce.DomainModelLayer.Products;
 using eCommerce.DomainModelLayer.Purchases;
+using eCommerce.Helpers.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +30,7 @@ namespace eCommerce.ApplicationLayer
             Mapper.CreateMap<Customer, CustomerDto>();
             Mapper.CreateMap<Product, ProductDto>();
             Mapper.CreateMap<CustomerPurchaseHistoryReadModel, CustomerPurchaseHistoryDto>();
+            Mapper.CreateMap<DomainEventRecord, EventDto>();
         }
     }
 }
