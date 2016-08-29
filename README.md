@@ -23,7 +23,7 @@ Please do note that this is my interpretation of Domain-driven design (i.e. bias
 
 [Applied Domain-Driven Design (DDD), Part 7 - Read Model Services](http://www.zankavtaskin.com/2016/06/applied-domain-driven-design-ddd-part-7.html)
 
-[Applied Domain-Driven Design (DDD) - Event Logging & Sourcing For Auditing  Services](http://www.zankavtaskin.com/2016/08/applied-domain-driven-design-ddd-event.html)
+[Applied Domain-Driven Design (DDD) - Event Logging & Sourcing For Auditing](http://www.zankavtaskin.com/2016/08/applied-domain-driven-design-ddd-event.html)
 
 ![alt tag](http://1.bp.blogspot.com/-f9QYYWLc1Uk/UoKzpDHYkkI/AAAAAAAACA4/OD1bq9MLYFY/s1600/DDD_png_pure.png)
 
