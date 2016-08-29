@@ -71,8 +71,6 @@
     <Compile Include="ApplicationLayer\Customers\CustomerPurchaseHistoryDto.cs" />
     <Compile Include="ApplicationLayer\Customers\CustomerService.cs" />
     <Compile Include="ApplicationLayer\Customers\ICustomerService.cs" />
-    <Compile Include="ApplicationLayer\History\CustomerFriendlyEventDto.cs" />
-    <Compile Include="ApplicationLayer\History\CustomerFriendlyHistoryDto.cs" />
     <Compile Include="ApplicationLayer\History\EventDto.cs" />
     <Compile Include="ApplicationLayer\History\HistoryDto.cs" />
     <Compile Include="ApplicationLayer\History\HistoryService.cs" />
@@ -149,7 +147,7 @@
     <Compile Include="Helpers\Domain\DomainEvents.cs" />
     <Compile Include="Helpers\Domain\Handle.cs" />
     <Compile Include="Helpers\Domain\IDomainEntity.cs" />
-    <Compile Include="Helpers\Domain\IDomainEvent.cs" />
+    <Compile Include="Helpers\Domain\DomainEvent.cs" />
     <Compile Include="InfrastructureLayer\WSNewsletterSubscriber.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\Repository\IRepository.cs" />

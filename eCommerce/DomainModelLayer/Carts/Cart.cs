@@ -29,7 +29,7 @@ namespace eCommerce.DomainModelLayer.Carts
         {
             get
             {
-                return this.Products.Sum(cartProduct =>cartProduct.Quantity * cartProduct.Product.Cost);
+                return this.Products.Sum(cartProduct => cartProduct.Quantity * cartProduct.Product.Cost);
             }
         }
 

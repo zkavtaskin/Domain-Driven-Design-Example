@@ -12,7 +12,7 @@ namespace eCommerce.WebService.Controllers
     /*
      * http://localhost:50300/api/cart/add?customerid=5D5020DA-47DF-4C82-A722-C8DEAF06AE23&productid=65D03D7E-E41A-49BC-8680-DC942BABD10A&quantity=1
      * http://localhost:50300/api/cart/getbyid?customerid=5D5020DA-47DF-4C82-A722-C8DEAF06AE23
-     * http://localhost:50300/api/cart/remove?customerid=5D5020DA-47DF-4C82-A722-C8DEAF06AE23&productid=&Quantity=1
+     * http://localhost:50300/api/cart/remove?customerid=5D5020DA-47DF-4C82-A722-C8DEAF06AE23&productid=65d03d7e-e41a-49bc-8680-dc942babd10a&Quantity=1
      * http://localhost:50300/api/cart/checkout?customerid=5D5020DA-47DF-4C82-A722-C8DEAF06AE23
      */
     public class CartController : ApiController
