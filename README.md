@@ -1,6 +1,8 @@
 Domain-Driven-Design-Example C#
 ============================
 
+![Alt text](https://leanworkspace.visualstudio.com/_apis/public/build/definitions/3c44af5e-2843-4cf8-8e4f-b13743536cc3/3/badge)
+
 **Repository objective:** To supplement blog articles on DDD (see below) and create easy to follow Domain-driven design repository that makes sense (if it still makes no sense then please do let me know). 
 
 Please do note that this is my interpretation of Domain-driven design (i.e. biased). Please use this for theoretical / educational purposes only. 
@@ -18,6 +20,10 @@ Please do note that this is my interpretation of Domain-driven design (i.e. bias
 [Applied Domain-Driven Design (DDD), Part 5 - Domain Service](http://www.zankavtaskin.com/2013/11/applied-domain-driven-design-ddd-part-4.html)
 
 [Applied Domain-Driven Design (DDD), Part 6 - Application Services](http://www.zankavtaskin.com/2013/11/applied-domain-driven-design-ddd-part-6.html)
+
+[Applied Domain-Driven Design (DDD), Part 7 - Read Model Services](http://www.zankavtaskin.com/2016/06/applied-domain-driven-design-ddd-part-7.html)
+
+[Applied Domain-Driven Design (DDD) - Event Logging & Sourcing For Auditing  Services](http://www.zankavtaskin.com/2016/08/applied-domain-driven-design-ddd-event.html)
 
 ![alt tag](http://1.bp.blogspot.com/-f9QYYWLc1Uk/UoKzpDHYkkI/AAAAAAAACA4/OD1bq9MLYFY/s1600/DDD_png_pure.png)
 
@@ -83,7 +89,7 @@ Customer and product already exists, so feel free just to call these urls.
 
 /api/cart/getbyid?customerid=5D5020DA-47DF-4C82-A722-C8DEAF06AE23
 
-/api/cart/remove?customerid=5D5020DA-47DF-4C82-A722-C8DEAF06AE23&productid=&Quantity=1
+/api/cart/remove?customerid=5D5020DA-47DF-4C82-A722-C8DEAF06AE23&productid=65d03d7e-e41a-49bc-8680-dc942babd10a&Quantity=1
 
 /api/cart/checkout?customerid=5D5020DA-47DF-4C82-A722-C8DEAF06AE23
 ```
