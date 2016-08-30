@@ -1,4 +1,5 @@
-﻿using eCommerce.Helpers.Repository;
+﻿using eCommerce.Helpers.Logging;
+using eCommerce.Helpers.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,16 +11,20 @@ namespace eCommerce.Helpers.Domain
         where TDomainEvent : DomainEvent
     {
         IDomainEventRepository domainEventRepository;
+        IRequestCorrelationIdentifier requestCorrelationIdentifier;
 
-        public DomainEventHandle(IDomainEventRepository domainEventRepository)
+        public DomainEventHandle(IDomainEventRepository domainEventRepository, 
+            IRequestCorrelationIdentifier requestCorrelationIdentifier)
         {
             this.domainEventRepository = domainEventRepository;
+            this.requestCorrelationIdentifier = requestCorrelationIdentifier;
         }
 
-        public void Handle(TDomainEvent args)
+        public void Handle(TDomainEvent @event)
         {
-            args.Flatten();
-            this.domainEventRepository.Add(args);
+            @event.Flatten();
+            @event.CorrelationID = this.requestCorrelationIdentifier.CorrelationID;
+            this.domainEventRepository.Add(@event);
         }
     }
 }

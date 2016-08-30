@@ -1,4 +1,5 @@
 ﻿using Castle.MicroKernel.Registration;
+using eCommerce.Helpers.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,8 @@ namespace eCommerce.WebService.App_Start.Installers
             container.Register(Classes.FromThisAssembly()
                .BasedOn<IHttpController>()
                .Configure(c => c.LifestyleTransient()));
+
+            container.Register(Component.For<IRequestCorrelationIdentifier>().ImplementedBy<WebRequestCorrelationIdentifier>().LifeStyle.PerWebRequest);
         }
     }
 }

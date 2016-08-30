@@ -95,6 +95,7 @@
     <Compile Include="Helpers\Domain\DomainEventHandle.cs" />
     <Compile Include="Helpers\Domain\DomainEventRecord.cs" />
     <Compile Include="Helpers\Domain\IDomainService.cs" />
+    <Compile Include="Helpers\Logging\IRequestCorrelationIdentifier.cs" />
     <Compile Include="Helpers\Repository\IDomainEventRepository.cs" />
     <Compile Include="Helpers\Specification\And.cs" />
     <Compile Include="Helpers\Specification\IExtensions.cs" />
