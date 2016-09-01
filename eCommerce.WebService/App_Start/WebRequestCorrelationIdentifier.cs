@@ -13,10 +13,10 @@ namespace eCommerce.WebService.App_Start
         public WebRequestCorrelationIdentifier()
         {
             /* #Customise your correlation ID here
-             * More request identification varibles you add easier 
+             * More request identification variables you add easier 
              * it's going to be to find the relevant W3C request when you hash it
              * 
-             * Below is just an example of varibles and hash algorithm that you can use:
+             * Below is just an example of variables and hash algorithm that you can use:
              */
             string rawCorrelationID = string.Join("_",
                     HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"],
