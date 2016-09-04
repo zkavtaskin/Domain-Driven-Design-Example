@@ -17,7 +17,7 @@ namespace eCommerce.WebService.App_Start.Installers
                .BasedOn<IHttpController>()
                .Configure(c => c.LifestyleTransient()));
 
-            container.Register(Component.For<IRequestCorrelationIdentifier>().ImplementedBy<WebRequestCorrelationIdentifier>().LifeStyle.PerWebRequest);
+            container.Register(Component.For<IRequestCorrelationIdentifier>().ImplementedBy<W3CWebRequestCorrelationIdentifier>().LifeStyle.PerWebRequest);
         }
     }
 }

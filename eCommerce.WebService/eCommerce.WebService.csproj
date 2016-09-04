@@ -148,7 +148,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BootstrapConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\WebRequestCorrelationIdentifier.cs" />
+    <Compile Include="App_Start\W3CWebRequestCorrelationIdentifier.cs" />
     <Compile Include="App_Start\Installers\ApplicationLayerInstall.cs" />
     <Compile Include="App_Start\Installers\DistributedInterfaceLayerInstall.cs" />
     <Compile Include="App_Start\Installers\DomainModelLayerInstall.cs" />
