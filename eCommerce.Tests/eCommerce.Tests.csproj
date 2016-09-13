@@ -73,6 +73,7 @@
     <Compile Include="DomainModelLayer\CreditCardTest.cs" />
     <Compile Include="DomainModelLayer\CartTest.cs" />
     <Compile Include="DomainModelLayer\CustomerTest.cs" />
+    <Compile Include="DomainModelLayer\CheckoutServiceTest.cs" />
     <Compile Include="DomainModelLayer\TaxServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

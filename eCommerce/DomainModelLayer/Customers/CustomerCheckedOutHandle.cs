@@ -11,18 +11,22 @@ namespace eCommerce.DomainModelLayer.Customers
     {
         readonly IEmailDispatcher emailDispatcher;
         readonly IEmailGenerator emailGenerator;
+        readonly ICustomerRepository customerRepository;
 
-
-        public CustomerCheckedOutHandle(IEmailGenerator emailGenerator, IEmailDispatcher emailSender)
+        public CustomerCheckedOutHandle(IEmailGenerator emailGenerator, 
+            IEmailDispatcher emailSender, ICustomerRepository customerRepository)
         {
             this.emailDispatcher = emailSender;
             this.emailGenerator = emailGenerator;
+            this.customerRepository = customerRepository;
         }
 
         public void Handle(CustomerCheckedOut args)
         {
+            Customer customer = this.customerRepository.FindById(args.Purchase.CustomerId);
+
             this.emailDispatcher.Dispatch(
-                this.emailGenerator.Generate(args.Purchase.Customer, EmailTemplate.PurchaseMade)
+                this.emailGenerator.Generate(customer, EmailTemplate.PurchaseMade)
                 );
 
             //send notifications, update third party systems, etc

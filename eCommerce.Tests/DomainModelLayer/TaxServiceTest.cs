@@ -31,8 +31,7 @@ namespace eCommerce.Tests.DomainModelLayer
             settings.SetupGet(x => x.BusinessCountry).Returns(new Country());
             
             Mock<Customer> customer = new Mock<Customer>();
-            customer.SetupGet(x => x.Country).Returns(new Country());
-
+            customer.SetupGet(x => x.CountryId).Returns(Guid.Empty);
 
             Mock<IRepository<CountryTax>> repositoryCountryTax = new Mock<IRepository<CountryTax>>();
 

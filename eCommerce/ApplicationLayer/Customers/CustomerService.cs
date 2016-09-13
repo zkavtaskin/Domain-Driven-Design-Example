@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using eCommerce.DomainModelLayer.Countries;
+using eCommerce.DomainModelLayer.Purchases;
 
 namespace eCommerce.ApplicationLayer.Customers
 {
@@ -13,13 +14,15 @@ namespace eCommerce.ApplicationLayer.Customers
     {
         readonly ICustomerRepository customerRepository;
         readonly IRepository<Country> countryRepository;
+        readonly IRepository<Purchase> purchaseRepository;
         readonly IUnitOfWork unitOfWork;
 
         public CustomerService(ICustomerRepository customerRepository,
-            IRepository<Country> countryRepository, IUnitOfWork unitOfWork)
+            IRepository<Country> countryRepository, IRepository<Purchase> purchaseRepository, IUnitOfWork unitOfWork)
         {
             this.customerRepository = customerRepository;
             this.countryRepository = countryRepository;
+            this.purchaseRepository = purchaseRepository;
             this.unitOfWork = unitOfWork;
         }
 
@@ -123,30 +126,38 @@ namespace eCommerce.ApplicationLayer.Customers
         //Approach 1 - Domain Model DTO Projection 
         public List<CustomerPurchaseHistoryDto> GetAllCustomerPurchaseHistoryV1()
         {
+            IEnumerable<Guid> customersThatHavePurhcasedSomething =
+                 this.purchaseRepository.Find(new PurchasedNProductsSpec(1))
+                                        .Select(purchase => purchase.CustomerId)
+                                        .Distinct();
+
             IEnumerable<Customer> customers =
-                 this.customerRepository.Find(new CustomerPurchasedNProductsSpec(1));
+                this.customerRepository.Find(new CustomerBulkIdFindSpec(customersThatHavePurhcasedSomething));
 
             List<CustomerPurchaseHistoryDto> customersPurchaseHistory =
                 new List<CustomerPurchaseHistoryDto>();
 
             foreach (Customer customer in customers)
             {
+                IEnumerable<Purchase> customerPurchases =
+                    this.purchaseRepository.Find(new CustomerPurchasesSpec(customer.Id));
+
                 CustomerPurchaseHistoryDto customerPurchaseHistory = new CustomerPurchaseHistoryDto();
                 customerPurchaseHistory.CustomerId = customer.Id;
                 customerPurchaseHistory.FirstName = customer.FirstName;
                 customerPurchaseHistory.LastName = customer.LastName;
                 customerPurchaseHistory.Email = customer.Email;
-                customerPurchaseHistory.TotalPurchases = customer.Purchases.Count;
+                customerPurchaseHistory.TotalPurchases = customerPurchases.Count();
                 customerPurchaseHistory.TotalProductsPurchased =
-                    customer.Purchases.Sum(purchase => purchase.Products.Sum(product => product.Quantity));
-                customerPurchaseHistory.TotalCost = customer.Purchases.Sum(purchase => purchase.TotalCost);
+                    customerPurchases.Sum(purchase => purchase.Products.Sum(product => product.Quantity));
+                customerPurchaseHistory.TotalCost = customerPurchases.Sum(purchase => purchase.TotalCost);
                 customersPurchaseHistory.Add(customerPurchaseHistory);
 
             }
             return customersPurchaseHistory;
         }
 
-        //Approach 2 - Infrastructure Read Model Projection 
+        //Approach 2 - Infrastructure Read Model Projection (Preferred)
         public List<CustomerPurchaseHistoryDto> GetAllCustomerPurchaseHistoryV2()
         {
             IEnumerable<CustomerPurchaseHistoryReadModel> customersPurchaseHistory =

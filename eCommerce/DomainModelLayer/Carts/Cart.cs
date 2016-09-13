@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using eCommerce.Helpers.Domain;
 using System.Collections.ObjectModel;
 using eCommerce.DomainModelLayer.Customers;
 using eCommerce.DomainModelLayer.Products;
-using eCommerce.Helpers.Repository;
-using eCommerce.DomainModelLayer.Purchases;
-using eCommerce.Helpers.Specification;
 
 namespace eCommerce.DomainModelLayer.Carts
 {
-    public class Cart : IDomainEntity
+    public class Cart : IAggregateRoot
     {
         public virtual Guid Id { get; protected set; }
 
@@ -23,13 +19,13 @@ namespace eCommerce.DomainModelLayer.Carts
             get { return cartProducts.AsReadOnly(); }
         }
 
-        public virtual Customer Customer { get; protected set; }
+        public virtual Guid CustomerId { get; protected set; }
 
         public virtual decimal TotalCost
         {
             get
             {
-                return this.Products.Sum(cartProduct => cartProduct.Quantity * cartProduct.Product.Cost);
+                return this.Products.Sum(cartProduct => cartProduct.Quantity * cartProduct.Cost);
             }
         }
 
@@ -48,7 +44,7 @@ namespace eCommerce.DomainModelLayer.Carts
 
             Cart cart = new Cart();
             cart.Id = Guid.NewGuid();
-            cart.Customer = customer;
+            cart.CustomerId = customer.Id;
 
             DomainEvents.Raise<CartCreated>(new CartCreated() { Cart = cart });
 
@@ -78,55 +74,9 @@ namespace eCommerce.DomainModelLayer.Carts
             this.cartProducts.Remove(cartProduct);
         }
 
-        public virtual Nullable<ProductIssues> IsPurchaseReady()
+        public virtual void Clear()
         {
-            ISpecification<Product> faultyProductSpec = new ProductReturnReasonSpec(ReturnReason.Faulty);
-
-            foreach (CartProduct cartProduct in this.Products)
-            {
-                bool isInStock = new ProductIsInStockSpec(cartProduct)
-                    .IsSatisfiedBy(cartProduct.Product);
-
-                if (!isInStock)
-                    return ProductIssues.NotInStock;
-
-                bool isFaulty = faultyProductSpec.IsSatisfiedBy(cartProduct.Product);
-
-                if (isFaulty)
-                    return ProductIssues.IsFaulty;
-            }
-            return null;
-        }
-
-        public virtual Nullable<CheckOutIssue> IsCheckOutReady()
-        {
-            Nullable<PaymentIssues> paymentIssues = this.Customer.IsPayReady();
-
-            if (paymentIssues.HasValue)
-                return (CheckOutIssue)paymentIssues.Value;
-
-            Nullable<ProductIssues> productIssue = this.IsPurchaseReady();
-
-            if (productIssue.HasValue)
-                return (CheckOutIssue)productIssue.Value;
-
-            return null;
-        }
-
-        public virtual Purchase Checkout()
-        {
-            Nullable<CheckOutIssue> checkoutIssue = this.IsCheckOutReady();
-            if (checkoutIssue.HasValue)
-                throw new Exception(checkoutIssue.Value.ToString());
-
-            Nullable<ProductIssues> productIssue = this.IsPurchaseReady();
-            if (productIssue.HasValue)
-                throw new Exception(productIssue.Value.ToString());
-
-            Purchase purchase = Purchase.Create(this.Customer, this.Products);
-            this.Customer.Add(purchase);
-            DomainEvents.Raise<CustomerCheckedOut>(new CustomerCheckedOut() { Purchase = purchase });
-            return purchase;
+            this.cartProducts.Clear();
         }
     }
 }

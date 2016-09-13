@@ -21,8 +21,7 @@ namespace eCommerce.DomainModelLayer.Customers
         {
             get
             {
-                return customer => customer.Email == this.email
-                    && customer.Active;
+                return customer => customer.Email == this.email;
             }
         }
     }

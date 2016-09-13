@@ -20,8 +20,7 @@ namespace eCommerce.ApplicationLayer
         protected override void Configure()
         {
             Mapper.CreateMap<Cart, CartDto>();
-            Mapper.CreateMap<CartProduct, CartProductDto>()
-                .ForMember(x => x.ProductId, options => options.MapFrom(x => x.Product.Id));
+            Mapper.CreateMap<CartProduct, CartProductDto>();
 
             Mapper.CreateMap<Purchase, CheckOutResultDto>()
                 .ForMember(x => x.PurchaseId, options => options.MapFrom(x => x.Id));

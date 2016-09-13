@@ -25,11 +25,8 @@ namespace eCommerce.Tests.DomainModelLayer
             expected.SetupGet(x => x.FirstName).Returns("John");
             expected.SetupGet(x => x.LastName).Returns("Smith");
             expected.SetupGet(x => x.Email).Returns("john.smith@microsoft.com");
-            expected.SetupGet(x => x.Created).Returns(DateTime.Today);
-            expected.SetupGet(x => x.Active).Returns(true);
-            expected.SetupGet(x => x.Purchases).Returns(new ReadOnlyCollection<Purchase>(new List<Purchase>()));
             expected.SetupGet(x => x.CreditCards).Returns(new ReadOnlyCollection<CreditCard>(new List<CreditCard>()));
-            expected.SetupGet(x => x.Country).Returns(new Country());
+            expected.SetupGet(x => x.CountryId).Returns(Guid.Empty);
 
             //call a method 
             Customer actual = Customer.Create(Guid.Empty, "John", "Smith", "john.smith@microsoft.com", new Country());
@@ -58,51 +55,6 @@ namespace eCommerce.Tests.DomainModelLayer
         public void Create_WithLastNameNull_ThrowsException()
         {
             Customer actual = Customer.Create("John", null, "Smith", new Country());
-        }
-
-        [TestMethod, TestCategory("Unit")]
-        public void IsPayReady_HasUnpaidBalance_PaymentIssueUnpaidBalance()
-        {
-            Nullable<PaymentIssues> expected = PaymentIssues.UnpaidBalance;
-
-            Mock<Customer> customer = new Mock<Customer>();
-            customer.SetupGet(x => x.Balance).Returns(-10);
-
-            //To keep customer locked, use mock to override properties. 
-            //Don't make IsPayReady virtual as it will lose it's programmed behaviour
-            Nullable<PaymentIssues> actual = customer.Object.IsPayReady();
-
-            actual.ShouldBeEquivalentTo(expected);
-        }
-
-        [TestMethod, TestCategory("Unit")]
-        public void IsPayReady_HasNoCreditCards_PaymentIssueNoCreditCardsAvailable()
-        {
-            Nullable<PaymentIssues> expected = PaymentIssues.NoActiveCreditCardAvailable;
-
-            Mock<Customer> customer = new Mock<Customer>();
-            customer.SetupGet(x => x.Balance).Returns(0);
-            customer.Setup(x => x.GetCreditCardsAvailble())
-                .Returns(new ReadOnlyCollection<CreditCard>(new List<CreditCard>()));
-
-            Nullable<PaymentIssues> actual = customer.Object.IsPayReady();
-
-            actual.ShouldBeEquivalentTo(expected);
-        }
-
-        [TestMethod, TestCategory("Unit")]
-        public void IsPayReady_IsReady_Null()
-        {
-            Nullable<PaymentIssues> expected = null;
-
-            Mock<Customer> customer = new Mock<Customer>();
-            customer.SetupGet(x => x.Balance).Returns(0);
-            customer.Setup(x => x.GetCreditCardsAvailble())
-                .Returns(new ReadOnlyCollection<CreditCard>(new List<CreditCard>() { new CreditCard() }));
-
-            Nullable<PaymentIssues> actual = customer.Object.IsPayReady();
-
-            actual.ShouldBeEquivalentTo(expected);
         }
 
         [TestMethod, TestCategory("Unit")]

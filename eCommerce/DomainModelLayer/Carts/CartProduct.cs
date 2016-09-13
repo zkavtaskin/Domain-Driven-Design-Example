@@ -5,18 +5,21 @@ using System.Text;
 using eCommerce.DomainModelLayer.Products;
 using eCommerce.DomainModelLayer.Services;
 using eCommerce.Helpers.Domain;
+using eCommerce.DomainModelLayer.Customers;
 
 namespace eCommerce.DomainModelLayer.Carts
 {
     public class CartProduct
     {
-        public virtual Cart Cart { get; protected set; }
+        public virtual Guid CartId { get; protected set; }
+        public virtual Guid CustomerId { get; protected set; }
         public virtual int Quantity { get; protected set; }
-        public virtual Product Product { get; protected set; }
+        public virtual Guid ProductId { get; protected set; }
         public virtual DateTime Created { get; protected set; }
+        public virtual decimal Cost { get; protected set; }
         public virtual decimal Tax { get; set; }
 
-        public static CartProduct Create(Cart cart, Product product, int quantity, ITaxService taxService)
+        public static CartProduct Create(Customer customer, Cart cart, Product product, int quantity, TaxService taxService)
         {
             if(cart == null)
                 throw new ArgumentNullException("cart");
@@ -26,11 +29,13 @@ namespace eCommerce.DomainModelLayer.Carts
 
             CartProduct cartProduct = new CartProduct()
             {
-                Cart = cart,
-                Product = product,
+                CustomerId = customer.Id,
+                CartId = cart.Id,
+                ProductId = product.Id,
                 Quantity = quantity,
                 Created = DateTime.Now,
-                Tax = taxService.Calculate(cart.Customer, product)
+                Cost = product.Cost,
+                Tax = taxService.Calculate(customer, product)
             };
 
             return cartProduct;

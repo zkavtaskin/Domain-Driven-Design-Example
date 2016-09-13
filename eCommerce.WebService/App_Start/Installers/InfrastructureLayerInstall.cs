@@ -22,6 +22,7 @@ namespace eCommerce.WebService.App_Start.Installers
         {
             container.Register(Component.For<IEmailDispatcher>().ImplementedBy<SmtpEmailDispatcher>().LifeStyle.Singleton);
             container.Register(Component.For<INewsletterSubscriber>().ImplementedBy<WSNewsletterSubscriber>().LifeStyle.Singleton);
+            container.Register(Component.For<IEmailGenerator>().ImplementedBy<StubEmailGenerator>().LifeStyle.Singleton);
 
             container.Register(Component.For(typeof(IRepository<>), typeof(MemoryRepository<>)).ImplementedBy(typeof(MemoryRepository<>)).LifestyleSingleton());
             container.Register(Component.For<IUnitOfWork>().ImplementedBy<MemoryUnitOfWork>().LifestyleSingleton());

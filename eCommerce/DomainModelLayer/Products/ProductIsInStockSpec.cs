@@ -23,7 +23,7 @@ namespace eCommerce.DomainModelLayer.Products
 
             get
             {
-                return product => product.Id == this.productCart.Product.Id && product.Active
+                return product => product.Id == this.productCart.ProductId && product.Active
                     && product.Quantity >= this.productCart.Quantity;
             }
         }

@@ -9,7 +9,7 @@ using System.Text;
 namespace eCommerce.InfrastructureLayer
 {
     public class MemoryRepository<TEntity> : IRepository<TEntity>
-        where TEntity : IDomainEntity
+        where TEntity : IAggregateRoot
     {
         protected static List<TEntity> entities = new List<TEntity>();
 

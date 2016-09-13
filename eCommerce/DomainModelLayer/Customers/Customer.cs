@@ -11,9 +11,8 @@ using eCommerce.DomainModelLayer.Countries;
 
 namespace eCommerce.DomainModelLayer.Customers
 {
-    public class Customer : IDomainEntity
+    public class Customer : IAggregateRoot
     {
-        private List<Purchase> purchases = new List<Purchase>();
         private List<CreditCard> creditCards = new List<CreditCard>();
 
         public virtual Guid Id { get; protected set; }
@@ -21,15 +20,10 @@ namespace eCommerce.DomainModelLayer.Customers
         public virtual string LastName { get; protected set; }
         public virtual string Email { get; protected set; }
         public virtual string Password { get; protected set; }
-        public virtual DateTime Created { get; protected set; }
-        public virtual bool Active { get; protected set; }
         public virtual decimal Balance { get; protected set; }
-        public virtual Country Country { get; protected set; }
+        public virtual Guid CountryId { get; protected set; }
 
-        public virtual ReadOnlyCollection<Purchase> Purchases { get { return this.purchases.AsReadOnly(); } }
         public virtual ReadOnlyCollection<CreditCard> CreditCards { get { return this.creditCards.AsReadOnly(); } }
-
-        public virtual Cart Cart { get; protected set; }
 
         public virtual void ChangeEmail(string email)
         {
@@ -65,14 +59,10 @@ namespace eCommerce.DomainModelLayer.Customers
                 FirstName = firstname,
                 LastName = lastname,
                 Email = email,
-                Active = true,
-                Created = DateTime.Today,
-                Country = country
+                CountryId = country.Id
             };
 
             DomainEvents.Raise<CustomerCreated>(new CustomerCreated() { Customer = customer });
-
-            customer.Cart = Cart.Create(customer);
 
             return customer;
         }
@@ -82,27 +72,11 @@ namespace eCommerce.DomainModelLayer.Customers
             return this.creditCards.FindAll(new CreditCardAvailableSpec(DateTime.Today).IsSatisfiedBy).AsReadOnly();
         }
 
-        public Nullable<PaymentIssues> IsPayReady()
-        {
-            if (this.Balance < 0)
-                return PaymentIssues.UnpaidBalance;
-
-            if (this.GetCreditCardsAvailble().Count == 0)
-                return PaymentIssues.NoActiveCreditCardAvailable;
-
-            return null;
-        }
-
         public virtual void Add(CreditCard creditCard)
         {
             this.creditCards.Add(creditCard);
 
             DomainEvents.Raise<CreditCardAdded>(new CreditCardAdded() { CreditCard = creditCard });
-        }
-
-        internal virtual void Add(Purchase purchase)
-        {
-            this.purchases.Add(purchase);
         }
     }
 }

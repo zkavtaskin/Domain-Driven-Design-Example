@@ -6,7 +6,7 @@ using eCommerce.Helpers.Domain;
 
 namespace eCommerce.DomainModelLayer.Countries
 {
-    public class Country : IDomainEntity
+    public class Country : IAggregateRoot
     {
         public Guid Id { get; protected set; }
         public string Name { get; protected set; }

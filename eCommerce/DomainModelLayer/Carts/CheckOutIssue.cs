@@ -7,9 +7,9 @@ namespace eCommerce.DomainModelLayer.Carts
 {
     public enum CheckOutIssue
     {
-        ProductNotInStock = 200,
-        ProductIsFaulty = 201,
-        UnpaidBalance = 100,
-        NoActiveCreditCardAvailable = 101
+        UnpaidBalance = 101,
+        NoActiveCreditCardAvailable = 102,
+        ProductNotInStock = 201,
+        ProductIsFaulty = 202,
     }
 }

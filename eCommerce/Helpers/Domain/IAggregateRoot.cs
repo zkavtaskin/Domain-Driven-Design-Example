@@ -2,7 +2,7 @@
 
 namespace eCommerce.Helpers.Domain
 {
-    public interface IDomainEntity
+    public interface IAggregateRoot
     {
         Guid Id { get; }
     }

@@ -6,7 +6,7 @@ using eCommerce.Helpers.Domain;
 
 namespace eCommerce.DomainModelLayer.Products
 {
-    public class ProductCode : IDomainEntity
+    public class ProductCode : IAggregateRoot
     {
         public Guid Id { get; protected set; }
         public string Name { get; protected set; }

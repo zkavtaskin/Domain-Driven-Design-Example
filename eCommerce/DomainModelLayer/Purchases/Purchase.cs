@@ -9,7 +9,7 @@ using eCommerce.Helpers.Domain;
 
 namespace eCommerce.DomainModelLayer.Purchases
 {
-    public class Purchase : IDomainEntity
+    public class Purchase : IAggregateRoot
     {
         private List<PurchasedProduct> purchasedProducts = new List<PurchasedProduct>();
 
@@ -19,23 +19,23 @@ namespace eCommerce.DomainModelLayer.Purchases
             get { return purchasedProducts.AsReadOnly(); }
         }
         public DateTime Created { get; protected set; }
-        public Customer Customer { get; protected set; }
+        public Guid CustomerId { get; protected set; }
         public decimal TotalTax { get; protected set; }
         public decimal TotalCost { get; protected set; }
 
-        public static Purchase Create(Customer customer, ReadOnlyCollection<CartProduct> cartProducts)
+        public static Purchase Create(Cart cart)
         {
             Purchase purchase = new Purchase()
             {
                 Id = Guid.NewGuid(),
                 Created = DateTime.Today,
-                Customer = customer,
-                TotalCost = customer.Cart.TotalCost,
-                TotalTax = customer.Cart.TotalTax
+                CustomerId = cart.CustomerId,
+                TotalCost = cart.TotalCost,
+                TotalTax = cart.TotalTax
             };
 
             List<PurchasedProduct> purchasedProducts = new List<PurchasedProduct>();
-            foreach (CartProduct cartProduct in cartProducts)
+            foreach (CartProduct cartProduct in cart.Products)
             {
                 purchasedProducts.Add(PurchasedProduct.Create(purchase, cartProduct));
             }

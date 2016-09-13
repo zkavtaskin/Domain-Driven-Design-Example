@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using eCommerce.Helpers.Repository;
 using eCommerce.DomainModelLayer.Customers;
 using eCommerce.DomainModelLayer.Products;
@@ -14,34 +11,48 @@ namespace eCommerce.ApplicationLayer.Carts
 {
     public class CartService : ICartService
     {
-        readonly IRepository<Customer> repositoryCustomer;
-        readonly IRepository<Product> repositoryProduct;
-        readonly IUnitOfWork unitOfWork;
-        readonly ITaxService taxDomainService;
+        IRepository<Customer> customerRepository;
+        IRepository<Product> productRepository;
+        IRepository<Cart> cartRepository;
+        IUnitOfWork unitOfWork;
+        TaxService taxDomainService;
+        CheckoutService checkoutDomainService; 
 
-        public CartService(IRepository<Customer> repositoryCustomer, 
-            IRepository<Product> repositoryProduct, IUnitOfWork unitOfWork, ITaxService taxDomainService)
+        public CartService(IRepository<Customer> customerRepository, 
+            IRepository<Product> productRepository, IRepository<Cart> cartRepository, 
+            IUnitOfWork unitOfWork, TaxService taxDomainService, CheckoutService checkoutDomainService)
         {
-            this.repositoryCustomer = repositoryCustomer;
-            this.repositoryProduct = repositoryProduct;
+            this.customerRepository = customerRepository;
+            this.productRepository = productRepository;
+            this.cartRepository = cartRepository;
             this.unitOfWork = unitOfWork;
             this.taxDomainService = taxDomainService;
+            this.checkoutDomainService = checkoutDomainService;
         }
 
         public CartDto Add(Guid customerId, CartProductDto productDto)
         {
             CartDto cartDto = null;
-            Customer customer = this.repositoryCustomer.FindById(customerId);
-            this.validateCustomer(customerId, customer);
 
-            Product product = this.repositoryProduct.FindById(productDto.ProductId);
+            Customer customer = this.customerRepository.FindById(customerId);
+            if (customer == null)
+                throw new Exception(String.Format("Customer was not found with this Id: {0}", customerId));
+
+            Cart cart = this.cartRepository.FindOne(new CustomerCartSpec(customerId));
+            if(cart == null)
+            {
+                cart = Cart.Create(customer);
+                this.cartRepository.Add(cart);
+            }
+
+            Product product = this.productRepository.FindById(productDto.ProductId);
             this.validateProduct(product.Id, product);
 
             //Double Dispatch Pattern
-            customer.Cart.Add(CartProduct.Create(customer.Cart, product, 
+            cart.Add(CartProduct.Create(customer, cart, product, 
                 productDto.Quantity, taxDomainService));
 
-            cartDto = Mapper.Map<Cart, CartDto>(customer.Cart);
+            cartDto = Mapper.Map<Cart, CartDto>(cart);
             this.unitOfWork.Commit();
             return cartDto;
         }
@@ -49,46 +60,56 @@ namespace eCommerce.ApplicationLayer.Carts
         public CartDto Remove(Guid customerId, Guid productId)
         {
             CartDto cartDto = null;
-            Customer customer = this.repositoryCustomer.FindById(customerId);
-            this.validateCustomer(customerId, customer);
 
-            Product product = this.repositoryProduct.FindById(productId);
+            Cart cart = this.cartRepository.FindOne(new CustomerCartSpec(customerId));
+            this.validateCart(customerId, cart);
+
+            Product product = this.productRepository.FindById(productId);
             this.validateProduct(productId, product);
 
-            customer.Cart.Remove(product);
-            cartDto = Mapper.Map<Cart, CartDto>(customer.Cart);
+            cart.Remove(product);
+            cartDto = Mapper.Map<Cart, CartDto>(cart);
             this.unitOfWork.Commit();
             return cartDto;
         }
 
         public CartDto Get(Guid customerId)
         {
-            Customer customer = this.repositoryCustomer.FindById(customerId);
-            this.validateCustomer(customerId, customer);
-            return Mapper.Map<Cart, CartDto>(customer.Cart);
+            Cart cart = this.cartRepository.FindOne(new CustomerCartSpec(customerId));
+            this.validateCart(customerId, cart);
+
+            return Mapper.Map<Cart, CartDto>(cart);
         }
 
         public CheckOutResultDto CheckOut(Guid customerId)
         {
             CheckOutResultDto checkOutResultDto = new CheckOutResultDto();
-            Customer customer = this.repositoryCustomer.FindById(customerId);
-            this.validateCustomer(customerId, customer);
 
-            checkOutResultDto.CheckOutIssue = customer.Cart.IsCheckOutReady();
+            Cart cart = this.cartRepository.FindOne(new CustomerCartSpec(customerId));
+            this.validateCart(customerId, cart);
 
-            if (!checkOutResultDto.CheckOutIssue.HasValue)
+            Customer customer = this.customerRepository.FindById(cart.CustomerId);
+
+            Nullable<CheckOutIssue> checkOutIssue = 
+                this.checkoutDomainService.CanCheckOut(customer, cart);
+
+            if (!checkOutIssue.HasValue)
             {
-                Purchase purchase = customer.Cart.Checkout();
+                Purchase purchase = this.checkoutDomainService.Checkout(customer, cart);
                 checkOutResultDto = Mapper.Map<Purchase, CheckOutResultDto>(purchase);
                 this.unitOfWork.Commit();
+            }
+            else
+            {
+                checkOutResultDto.CheckOutIssue = checkOutIssue;
             }
 
             return checkOutResultDto;
         }
 
-        private void validateCustomer(Guid customerId, Customer customer)
+        private void validateCart(Guid customerId, Cart cart)
         {
-            if (customer == null)
+            if (cart == null)
                 throw new Exception(String.Format("Customer was not found with this Id: {0}", customerId));
         }
 

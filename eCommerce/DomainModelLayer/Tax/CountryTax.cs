@@ -7,7 +7,7 @@ using System.Text;
 
 namespace eCommerce.DomainModelLayer.Tax
 {
-    public class CountryTax : IDomainEntity
+    public class CountryTax : IAggregateRoot
     {
         public virtual Guid Id { get; protected set; }
         public virtual Country Country { get; protected set; }

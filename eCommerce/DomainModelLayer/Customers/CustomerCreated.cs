@@ -15,7 +15,7 @@ namespace eCommerce.DomainModelLayer.Customers
             this.Args.Add("FirstName", this.Customer.FirstName);
             this.Args.Add("LastName", this.Customer.LastName);
             this.Args.Add("Email", this.Customer.Email);
-            this.Args.Add("Country", this.Customer.Country.Id);
+            this.Args.Add("Country", this.Customer.CountryId);
         }
     }
 }

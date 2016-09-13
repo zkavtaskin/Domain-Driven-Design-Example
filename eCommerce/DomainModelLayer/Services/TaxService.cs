@@ -7,10 +7,11 @@ using eCommerce.DomainModelLayer.Products;
 using eCommerce.Helpers.Repository;
 using eCommerce.DomainModelLayer.Tax;
 using eCommerce.DomainModelLayer.Customers.Spec;
+using eCommerce.Helpers.Domain;
 
 namespace eCommerce.DomainModelLayer.Services
 {
-    public class TaxService : ITaxService
+    public class TaxService : IDomainService
     {
         readonly IRepository<CountryTax> countryTax;
         readonly Settings settings;
@@ -29,7 +30,7 @@ namespace eCommerce.DomainModelLayer.Services
             if (product == null)
                 throw new ArgumentNullException("product");
 
-            CountryTax customerCountryTax = this.countryTax.FindOne(new CountryTypeOfTaxSpec(customer.Country.Id, TaxType.Customer));
+            CountryTax customerCountryTax = this.countryTax.FindOne(new CountryTypeOfTaxSpec(customer.CountryId, TaxType.Customer));
             CountryTax businessCountryTax = this.countryTax.FindOne(new CountryTypeOfTaxSpec(settings.BusinessCountry.Id, TaxType.Business));
 
             return (product.Cost * customerCountryTax.Percentage)

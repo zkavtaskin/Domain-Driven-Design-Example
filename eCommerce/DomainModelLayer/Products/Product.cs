@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 
 namespace eCommerce.DomainModelLayer.Products
 {
-    public class Product : IDomainEntity
+    public class Product : IAggregateRoot
     {
         private List<Return> returns = new List<Return>();
 

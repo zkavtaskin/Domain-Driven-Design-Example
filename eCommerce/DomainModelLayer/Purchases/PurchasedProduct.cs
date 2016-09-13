@@ -9,16 +9,16 @@ namespace eCommerce.DomainModelLayer.Purchases
 {
     public class PurchasedProduct
     {
-        public Purchase Purchase { get; protected set; }
-        public Product Product { get; protected set; }
+        public Guid PurchaseId { get; protected set; }
+        public Guid ProductId { get; protected set; }
         public int Quantity { get; protected set; }
 
         public static PurchasedProduct Create(Purchase purchase, CartProduct cartProduct)
         {
             return new PurchasedProduct()
             {
-                Product = cartProduct.Product,
-                Purchase = purchase,
+                ProductId = cartProduct.ProductId,
+                PurchaseId = purchase.Id,
                 Quantity = cartProduct.Quantity
             };
         }

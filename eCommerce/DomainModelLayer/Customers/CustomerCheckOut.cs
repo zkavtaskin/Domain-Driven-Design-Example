@@ -13,7 +13,7 @@ namespace eCommerce.DomainModelLayer.Customers
 
         public override void Flatten()
         {
-            this.Args.Add("CustomerId", this.Purchase.Customer.Id);
+            this.Args.Add("CustomerId", this.Purchase.CustomerId);
             this.Args.Add("PurchaseId", this.Purchase.Id);
             this.Args.Add("TotalCost", this.Purchase.TotalCost);
             this.Args.Add("TotalTax", this.Purchase.TotalTax);

@@ -12,7 +12,7 @@ namespace eCommerce.DomainModelLayer.Carts
 
         public override void Flatten()
         {
-            this.Args.Add("CustomerId", this.Cart.Customer.Id);
+            this.Args.Add("CustomerId", this.Cart.CustomerId);
             this.Args.Add("CartId", this.Cart.Id);
         }
     }
