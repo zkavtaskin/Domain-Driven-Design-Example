@@ -24,9 +24,16 @@ namespace eCommerce.WebService.Controllers
             this.cartService = cartService;
         }
 
-        [HttpGet]
-        public Response<CartDto> Add(Guid customerId, [FromUri]CartProductDto cartDto)
+        [HttpPut]
+        public Response<CartDto> Add(AddProductToCartDto addProductToCart)
         {
+            Guid customerId = addProductToCart.CustomerId;
+            CartProductDto cartDto = new CartProductDto
+            {
+                ProductId = addProductToCart.ProductId,
+                Quantity = addProductToCart.Quantity
+            };
+
             Response<CartDto> response = new Response<CartDto>();
             try
             {
@@ -58,9 +65,11 @@ namespace eCommerce.WebService.Controllers
             return response;
         }
 
-        [HttpGet]
-        public Response<CartDto> Remove(Guid customerId, Guid productId)
+        [HttpDelete]
+        public Response<CartDto> Remove(CustomerProductDto customerProductDto)
         {
+            Guid customerId = customerProductDto.CustomerId;
+            Guid productId = customerProductDto.ProductId;
             Response<CartDto> response = new Response<CartDto>();
             try
             {
@@ -76,7 +85,7 @@ namespace eCommerce.WebService.Controllers
         }
 
 
-        [HttpGet]
+        [HttpPost]
         public Response<CheckOutResultDto> Checkout(Guid customerId)
         {
             Response<CheckOutResultDto> response = new Response<CheckOutResultDto>();

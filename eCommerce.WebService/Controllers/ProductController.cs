@@ -24,8 +24,8 @@ namespace eCommerce.WebService.Controllers
             this.productService = productService;
         }
 
-        [HttpGet]
-        public Response<ProductDto> Add([FromUri]ProductDto productDto)
+        [HttpPut]
+        public Response<ProductDto> Add(ProductDto productDto)
         {
             Response<ProductDto> response = new Response<ProductDto>();
             try
