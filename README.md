@@ -7,7 +7,7 @@ Domain-Driven-Design-Example C#
 
 Please do note that this is my interpretation of Domain-driven design (i.e. biased). Please use this for theoretical / educational purposes only. 
 
-###Articles
+### Articles
 
 [Applied Domain-Driven Design (DDD), Part 1 - Basics](http://www.zankavtaskin.com/2013/09/applied-domain-driven-design-ddd-part-1.html)
 
@@ -29,7 +29,7 @@ Please do note that this is my interpretation of Domain-driven design (i.e. bias
 
 ![alt tag](http://1.bp.blogspot.com/-f9QYYWLc1Uk/UoKzpDHYkkI/AAAAAAAACA4/OD1bq9MLYFY/s1600/DDD_png_pure.png)
 
-###Structure
+### Structure
 
 * eCommerce.WebService
 * eCommerce
@@ -47,13 +47,13 @@ Please do note that this is my interpretation of Domain-driven design (i.e. bias
                * Event
      * InfrastructureLayer
 
-###API
+### API
 
 To keep things simple I have created in memory repository with few saved items. To start using simply download, open solution and run. 
 
 
 
-####Customer
+#### Customer
 
 Customer already exists (John Smith, ID: 5D5020DA-47DF-4C82-A722-C8DEAF06AE23).
 
@@ -71,7 +71,7 @@ api/customer/RemoveById/5D5020DA-47DF-4C82-A722-C8DEAF06AE23
 api/customer/update?id=5D5020DA-47DF-4C82-A722-C8DEAF06AE23&Email=smith.john@microsoft.com
 ```
 
-####Product
+#### Product
 
 Product already exists (iPhone,  ID: 65D03D7E-E41A-49BC-8680-DC942BABD10A).
 
@@ -83,7 +83,7 @@ api/product/add?name=iPhone5&quantity=6&cost=422&productcodeid=B2773EBF-CD0C-4F3
 api/product/get/65D03D7E-E41A-49BC-8680-DC942BABD10A
  ```    
  
-####Cart
+#### Cart
 
 Customer and product already exists, so feel free just to call these urls.
 ```
