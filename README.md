@@ -57,7 +57,7 @@ To keep things simple I have created in memory repository with few saved items. 
 
 Customer already exists (John Smith, ID: 5D5020DA-47DF-4C82-A722-C8DEAF06AE23).
 
-But if you would like to add my customers here are urls that you can call.
+But if you would like to add my customers here are urls that you can call:
 
 ```
 api/customer/add?FirstName=john2&LastName=smith2&Email=john2.smith2@microsoft.com
@@ -75,7 +75,7 @@ api/customer/update?id=5D5020DA-47DF-4C82-A722-C8DEAF06AE23&Email=smith.john@mic
 
 Product already exists (iPhone,  ID: 65D03D7E-E41A-49BC-8680-DC942BABD10A).
 
-But if you would like to add more products here are urls that you can call.
+But if you would like to add more products here are urls that you can call:
 
 ```
 api/product/add?name=iPhone5&quantity=6&cost=422&productcodeid=B2773EBF-CD0C-4F31-83E2-691973E32531
@@ -85,7 +85,7 @@ api/product/get/65D03D7E-E41A-49BC-8680-DC942BABD10A
  
 #### Cart
 
-Customer and product already exists, so feel free just to call these urls.
+Customer and product already exists, so feel free just to call these urls:
 ```
 /api/cart/add?customerid=5D5020DA-47DF-4C82-A722-C8DEAF06AE23&productid=65D03D7E-E41A-49BC-8680-DC942BABD10A&quantity=1
 
