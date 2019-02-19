@@ -47,3 +47,4 @@ build/
 *.pidb
 *.log
 *.scc
+*.vs

@@ -12,41 +12,26 @@ namespace eCommerce.DomainModelLayer.Carts
     {
         public virtual Guid Id { get; protected set; }
 
-        private List<CartProduct> cartProducts = new List<CartProduct>();
+        private readonly List<CartProduct> _cartProducts = new List<CartProduct>();
 
-        public virtual ReadOnlyCollection<CartProduct> Products
-        {
-            get { return cartProducts.AsReadOnly(); }
-        }
+        public virtual ReadOnlyCollection<CartProduct> Products => _cartProducts.AsReadOnly();
 
         public virtual Guid CustomerId { get; protected set; }
 
-        public virtual decimal TotalCost
-        {
-            get
-            {
-                return this.Products.Sum(cartProduct => cartProduct.Quantity * cartProduct.Cost);
-            }
-        }
+        public virtual decimal TotalCost => Products.Sum(cartProduct => cartProduct.Quantity * cartProduct.Cost);
 
-        public virtual decimal TotalTax
-        {
-            get
-            {
-                return this.Products.Sum(cartProducts => cartProducts.Tax);
-            }
-        }
+        public virtual decimal TotalTax => Products.Sum(cartProducts => cartProducts.Tax);
 
         public static Cart Create(Customer customer)
         {
             if (customer == null)
-                throw new ArgumentNullException("customer");
+                throw new ArgumentNullException(nameof(customer));
 
             Cart cart = new Cart();
             cart.Id = Guid.NewGuid();
             cart.CustomerId = customer.Id;
 
-            DomainEvents.Raise<CartCreated>(new CartCreated() { Cart = cart });
+            DomainEvents.Raise(new CartCreated { Cart = cart });
 
             return cart;
         }
@@ -56,9 +41,9 @@ namespace eCommerce.DomainModelLayer.Carts
             if (cartProduct == null)
                 throw new ArgumentNullException();
 
-            DomainEvents.Raise<ProductAddedCart>(new ProductAddedCart() { CartProduct = cartProduct });
+            DomainEvents.Raise(new ProductAddedCart { CartProduct = cartProduct });
 
-            this.cartProducts.Add(cartProduct);
+            _cartProducts.Add(cartProduct);
         }
 
         public virtual void Remove(Product product)
@@ -67,16 +52,20 @@ namespace eCommerce.DomainModelLayer.Carts
                 throw new ArgumentNullException("product");
 
             CartProduct cartProduct =
-                this.cartProducts.Find(new ProductInCartSpec(product).IsSatisfiedBy);
+                _cartProducts.Find(new ProductInCartSpec(product).IsSatisfiedBy);
 
-            DomainEvents.Raise<ProductRemovedCart>(new ProductRemovedCart() { CartProduct = cartProduct });
+            DomainEvents.Raise(new ProductRemovedCart() { CartProduct = cartProduct });
 
-            this.cartProducts.Remove(cartProduct);
+            _cartProducts.Remove(cartProduct);
         }
 
-        public virtual void Clear()
+        public virtual void Clear() => _cartProducts.Clear();
+
+        public Cart Share(Customer receiver)
         {
-            this.cartProducts.Clear();
+            var cart = Create(receiver);
+            Products.ToList().ForEach(product => cart.Add(product));
+            return cart;
         }
     }
 }

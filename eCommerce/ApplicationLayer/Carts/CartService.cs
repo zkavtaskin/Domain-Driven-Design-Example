@@ -15,12 +15,12 @@ namespace eCommerce.ApplicationLayer.Carts
         IRepository<Product> productRepository;
         IRepository<Cart> cartRepository;
         IUnitOfWork unitOfWork;
-        TaxService taxDomainService;
-        CheckoutService checkoutDomainService; 
+        ITaxService taxDomainService;
+        CheckoutService checkoutDomainService;
 
-        public CartService(IRepository<Customer> customerRepository, 
-            IRepository<Product> productRepository, IRepository<Cart> cartRepository, 
-            IUnitOfWork unitOfWork, TaxService taxDomainService, CheckoutService checkoutDomainService)
+        public CartService(IRepository<Customer> customerRepository,
+            IRepository<Product> productRepository, IRepository<Cart> cartRepository,
+            IUnitOfWork unitOfWork, ITaxService taxDomainService, CheckoutService checkoutDomainService)
         {
             this.customerRepository = customerRepository;
             this.productRepository = productRepository;
@@ -39,7 +39,7 @@ namespace eCommerce.ApplicationLayer.Carts
                 throw new Exception(String.Format("Customer was not found with this Id: {0}", customerId));
 
             Cart cart = this.cartRepository.FindOne(new CustomerCartSpec(customerId));
-            if(cart == null)
+            if (cart == null)
             {
                 cart = Cart.Create(customer);
                 this.cartRepository.Add(cart);
@@ -49,7 +49,7 @@ namespace eCommerce.ApplicationLayer.Carts
             this.validateProduct(product.Id, product);
 
             //Double Dispatch Pattern
-            cart.Add(CartProduct.Create(customer, cart, product, 
+            cart.Add(CartProduct.Create(customer, cart, product,
                 productDto.Quantity, taxDomainService));
 
             cartDto = Mapper.Map<Cart, CartDto>(cart);
@@ -90,7 +90,7 @@ namespace eCommerce.ApplicationLayer.Carts
 
             Customer customer = this.customerRepository.FindById(cart.CustomerId);
 
-            Nullable<CheckOutIssue> checkOutIssue = 
+            Nullable<CheckOutIssue> checkOutIssue =
                 this.checkoutDomainService.CanCheckOut(customer, cart);
 
             if (!checkOutIssue.HasValue)

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using eCommerce.DomainModelLayer.Customers;
 using eCommerce.DomainModelLayer.Products;
 using eCommerce.Helpers.Repository;
@@ -11,15 +8,15 @@ using eCommerce.Helpers.Domain;
 
 namespace eCommerce.DomainModelLayer.Services
 {
-    public class TaxService : IDomainService
+    public class TaxService : IDomainService, ITaxService
     {
-        readonly IRepository<CountryTax> countryTax;
-        readonly Settings settings;
+        readonly IRepository<CountryTax> _countryTax;
+        readonly Settings _settings;
 
         public TaxService(Settings settings, IRepository<CountryTax> countryTax)
         {
-            this.countryTax = countryTax;
-            this.settings = settings;
+            _countryTax = countryTax;
+            _settings = settings;
         }
 
         public decimal Calculate(Customer customer, Product product)
@@ -30,8 +27,8 @@ namespace eCommerce.DomainModelLayer.Services
             if (product == null)
                 throw new ArgumentNullException("product");
 
-            CountryTax customerCountryTax = this.countryTax.FindOne(new CountryTypeOfTaxSpec(customer.CountryId, TaxType.Customer));
-            CountryTax businessCountryTax = this.countryTax.FindOne(new CountryTypeOfTaxSpec(settings.BusinessCountry.Id, TaxType.Business));
+            CountryTax customerCountryTax = this._countryTax.FindOne(new CountryTypeOfTaxSpec(customer.CountryId, TaxType.Customer));
+            CountryTax businessCountryTax = this._countryTax.FindOne(new CountryTypeOfTaxSpec(_settings.BusinessCountry.Id, TaxType.Business));
 
             return (product.Cost * customerCountryTax.Percentage)
                      + (product.Cost * businessCountryTax.Percentage);
