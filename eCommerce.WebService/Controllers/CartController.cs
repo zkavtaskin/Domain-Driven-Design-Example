@@ -20,7 +20,7 @@ namespace eCommerce.WebService.Controllers
             this.cartService = cartService;
         }
 
-        [HttpPost]
+        [HttpGet]
         public Response<CartDto> Add(Guid customerId, [FromUri]CartProductDto cartDto) 
             => CreateResponse(() => this.cartService.Add(customerId, cartDto));
 
@@ -28,16 +28,16 @@ namespace eCommerce.WebService.Controllers
         public Response<CartDto> GetById(Guid customerId) 
             => CreateResponse(() => this.cartService.Get(customerId));
 
-        [HttpPost]
+        [HttpGet]
         public Response<CartDto> Remove(Guid customerId, Guid productId) 
             => CreateResponse(() => this.cartService.Remove(customerId, productId));
 
 
-        [HttpPost]
+        [HttpGet]
         public Response<CheckOutResultDto> Checkout(Guid customerId) 
             => CreateResponse(() => this.cartService.CheckOut(customerId));
 
-        [HttpPost]
+        [HttpGet]
         public Response<CartDto> Share(Guid cartOwnerId, Guid cartRecipientId) 
             => CreateResponse(() => this.cartService.Share(cartOwnerId, cartRecipientId));
 
