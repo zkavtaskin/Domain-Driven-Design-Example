@@ -22,7 +22,8 @@ build/
 
 .vs/
 
-packages
+packages/*
+!packages/AutoMapper.3.2.1
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
