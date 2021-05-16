@@ -26,8 +26,8 @@ namespace eCommerce.WebService.Controllers
             this.customerService = customerService;
         }
 
-        [HttpGet]
-        public Response<CustomerDto> Add([FromUri]CustomerDto customer)
+        [HttpPut]
+        public Response<CustomerDto> Add(CustomerDto customer)
         {
             Response<CustomerDto> response = new Response<CustomerDto>();
             try
@@ -77,7 +77,7 @@ namespace eCommerce.WebService.Controllers
             return response;
         }
 
-        [HttpGet]
+        [HttpDelete]
         public Response RemoveById(Guid id)
         {
             Response response = new Response();
@@ -94,8 +94,8 @@ namespace eCommerce.WebService.Controllers
             return response;
         }
 
-         [HttpGet]
-        public Response Update([FromUri]CustomerDto customer)
+         [HttpPost]
+        public Response Update(CustomerDto customer)
         {
             Response response = new Response();
             try

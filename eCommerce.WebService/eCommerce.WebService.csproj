@@ -153,6 +153,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AddProductToCartDto.cs" />
+    <Compile Include="Models\CustomerProductDto.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="Models\ResponseOfTReturn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

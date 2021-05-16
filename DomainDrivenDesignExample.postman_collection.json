@@ -1,0 +1,347 @@
+{
+	"variables": [],
+	"info": {
+		"name": "DomainDrivenDesignExample",
+		"_postman_id": "acb13727-deee-0a93-6321-c75af23454b5",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cart",
+			"description": "",
+			"item": [
+				{
+					"name": "CheckoutCart",
+					"request": {
+						"url": {
+							"raw": "http://localhost:50300/api/Cart/Checkout?customerId=23ab1f3d-ff18-471f-b4cc-6b07a6f15927",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50300",
+							"path": [
+								"api",
+								"Cart",
+								"Checkout"
+							],
+							"query": [
+								{
+									"key": "customerId",
+									"value": "23ab1f3d-ff18-471f-b4cc-6b07a6f15927",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "RemoveProductFromCustomer",
+					"request": {
+						"url": "http://localhost:50300/api/Cart/Remove",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"CustomerId\":\"23ab1f3d-ff18-471f-b4cc-6b07a6f15927\",\n\t\"ProductId\":\"5bd48ead-c6a6-4a59-93f4-1e3e40606623\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetCartById",
+					"request": {
+						"url": {
+							"raw": "http://localhost:50300/api/Cart/GetById?CustomerId=23ab1f3d-ff18-471f-b4cc-6b07a6f15927",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50300",
+							"path": [
+								"api",
+								"Cart",
+								"GetById"
+							],
+							"query": [
+								{
+									"key": "CustomerId",
+									"value": "23ab1f3d-ff18-471f-b4cc-6b07a6f15927",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "AddProductToCart",
+					"request": {
+						"url": "http://localhost:50300/api/Cart/Add",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"CustomerId\":\"23ab1f3d-ff18-471f-b4cc-6b07a6f15927\",\n\t\"ProductId\":\"5bd48ead-c6a6-4a59-93f4-1e3e40606623\",\n\t\"Quantity\":\"100\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"description": "",
+			"item": [
+				{
+					"name": "GetCustomerById",
+					"request": {
+						"url": {
+							"raw": "http://localhost:50300/api/Customer/GetById?id=23ab1f3d-ff18-471f-b4cc-6b07a6f15927",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50300",
+							"path": [
+								"api",
+								"Customer",
+								"GetById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "23ab1f3d-ff18-471f-b4cc-6b07a6f15927",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "RemoveCustomerById",
+					"request": {
+						"url": {
+							"raw": "http://localhost:50300/api/Customer/RemoveById?id=1b5b0221-498f-41c0-9346-129d76868d62",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50300",
+							"path": [
+								"api",
+								"Customer",
+								"RemoveById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1b5b0221-498f-41c0-9346-129d76868d62",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateCustomer",
+					"request": {
+						"url": "http://localhost:50300/api/Customer/Update",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"Id\": \"23ab1f3d-ff18-471f-b4cc-6b07a6f15927\",\r\n  \"FirstName\": \"\",\r\n  \"LastName\": \"\",\r\n  \"Email\": \"other@email.em\",\r\n  \"CountryId\": \"\"\r\n}\r\n\r\n// Two countires are predefined: \r\n// \"229074BD-2356-4B5A-8619-CDEBBA71CC21\" - \"United Kingdom\"\r\n//  F3C78DD5-026F-4402-8A19-DAA956ACE593\" - \"United States\"\r\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "AddCustomer",
+					"request": {
+						"url": "http://localhost:50300/api/Customer/Add",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"Id\": \"\",\r\n  \"FirstName\": \"john\",\r\n  \"LastName\": \"smith\",\r\n  \"Email\": \"john2.smith2@microsoft.com\",\r\n  \"CountryId\": \"229074BD-2356-4B5A-8619-CDEBBA71CC21\"\r\n}\r\n\r\n// Two countires are predefined: \r\n// \"229074BD-2356-4B5A-8619-CDEBBA71CC21\" - \"United Kingdom\"\r\n// \"F3C78DD5-026F-4402-8A19-DAA956ACE593\" - \"United States\"\r\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "IsCustomerEmailAvailable",
+					"request": {
+						"url": {
+							"raw": "http://localhost:50300/api/Customer/IsEmailAvailable?email=john2.smith2@microsoft.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50300",
+							"path": [
+								"api",
+								"Customer",
+								"IsEmailAvailable"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "john2.smith2@microsoft.com",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "History",
+			"description": "",
+			"item": [
+				{
+					"name": "AllHistory",
+					"request": {
+						"url": "http://localhost:50300/api/History/All",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"description": "",
+			"item": [
+				{
+					"name": "AddProduct",
+					"request": {
+						"url": "http://localhost:50300/api/Product/Add",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n  \"Id\": \"\",\r\n  \"Name\": \"iPhone\" ,\r\n  \"Created\": \"\",\r\n  \"Modified\": \"\",\r\n  \"Active\": \"\",\r\n  \"Quantity\": \"6\",\r\n  \"Cost\": \"422\",\r\n  \"ProductCodeId\": \"B2773EBF-CD0C-4F31-83E2-691973E32531\", \r\n  \"ProductCodeName\": \"HD\"\r\n}\r\n\r\n// Two product codes are predefined: B2773EBF-CD0C-4F31-83E2-691973E32531 (HD) and A4E934EF-C40D-41B3-87DF-C65F8DDD6C23 (VK)\r\n\r\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetProduct",
+					"request": {
+						"url": {
+							"raw": "http://localhost:50300/api/Product/Get?Id=5bd48ead-c6a6-4a59-93f4-1e3e40606623",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50300",
+							"path": [
+								"api",
+								"Product",
+								"Get"
+							],
+							"query": [
+								{
+									"key": "Id",
+									"value": "5bd48ead-c6a6-4a59-93f4-1e3e40606623",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
