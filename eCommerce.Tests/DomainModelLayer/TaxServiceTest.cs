@@ -3,18 +3,13 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using eCommerce.DomainModelLayer.Customers;
 using Moq;
 using FluentAssertions;
-using eCommerce.DomainModelLayer.Purchases;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using FluentAssertions.Equivalency;
-using eCommerce.Helpers.Domain;
-using eCommerce.DomainModelLayer.Services;
 using eCommerce.DomainModelLayer;
 using eCommerce.Helpers.Repository;
 using eCommerce.DomainModelLayer.Tax;
 using eCommerce.DomainModelLayer.Countries;
 using eCommerce.DomainModelLayer.Products;
 using eCommerce.DomainModelLayer.Customers.Spec;
+using eCommerce.DomainModelLayer.Services;
 
 namespace eCommerce.Tests.DomainModelLayer
 {
@@ -48,7 +43,7 @@ namespace eCommerce.Tests.DomainModelLayer
             product.SetupGet(x => x.Code).Returns(new ProductCode());
 
             //call method
-            TaxService taxService = new TaxService(settings.Object, repositoryCountryTax.Object);
+            ITaxService taxService = new TaxService(settings.Object, repositoryCountryTax.Object);
 
             decimal actual = taxService.Calculate(customer.Object, product.Object);
 

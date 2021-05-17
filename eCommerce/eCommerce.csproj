@@ -95,6 +95,7 @@
     <Compile Include="DomainModelLayer\Services\PaymentStatus.cs" />
     <Compile Include="DomainModelLayer\Tax\CountryTax.cs" />
     <Compile Include="DomainModelLayer\Tax\CountryTaxCreated.cs" />
+    <Compile Include="DomainModelLayer\Services\ITaxService.cs" />
     <Compile Include="DomainModelLayer\Tax\TaxType.cs" />
     <Compile Include="DomainModelLayer\Tax\CountryTypeOfTaxSpec.cs" />
     <Compile Include="Helpers\Domain\DomainEventHandle.cs" />

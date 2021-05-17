@@ -1,10 +1,6 @@
 ﻿using eCommerce.WebService.Models;
 using eCommerce.ApplicationLayer.Carts;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace eCommerce.WebService.Controllers
@@ -25,73 +21,40 @@ namespace eCommerce.WebService.Controllers
         }
 
         [HttpGet]
-        public Response<CartDto> Add(Guid customerId, [FromUri]CartProductDto cartDto)
-        {
-            Response<CartDto> response = new Response<CartDto>();
-            try
-            {
-                response.Object = this.cartService.Add(customerId, cartDto);
-            }
-            catch (Exception ex)
-            {
-                //log error
-                response.Errored = true;
-                response.ErrorMessage = ex.Message;
-            }
-            return response;
-        }
+        public Response<CartDto> Add(Guid customerId, [FromUri]CartProductDto cartDto) 
+            => CreateResponse(() => this.cartService.Add(customerId, cartDto));
 
         [HttpGet]
-        public Response<CartDto> GetById(Guid customerId)
-        {
-            Response<CartDto> response = new Response<CartDto>();
-            try
-            {
-                response.Object = this.cartService.Get(customerId);
-            }
-            catch (Exception ex)
-            {
-                //log error
-                response.Errored = true;
-                response.ErrorMessage = ex.Message;
-            }
-            return response;
-        }
+        public Response<CartDto> GetById(Guid customerId) 
+            => CreateResponse(() => this.cartService.Get(customerId));
 
         [HttpGet]
-        public Response<CartDto> Remove(Guid customerId, Guid productId)
-        {
-            Response<CartDto> response = new Response<CartDto>();
-            try
-            {
-                response.Object = this.cartService.Remove(customerId, productId);
-            }
-            catch (Exception ex)
-            {
-                //log error
-                response.Errored = true;
-                response.ErrorMessage = ex.Message;
-            }
-            return response;
-        }
+        public Response<CartDto> Remove(Guid customerId, Guid productId) 
+            => CreateResponse(() => this.cartService.Remove(customerId, productId));
 
 
         [HttpGet]
-        public Response<CheckOutResultDto> Checkout(Guid customerId)
+        public Response<CheckOutResultDto> Checkout(Guid customerId) 
+            => CreateResponse(() => this.cartService.CheckOut(customerId));
+
+        [HttpGet]
+        public Response<CartDto> Share(Guid cartOwnerId, Guid cartRecipientId) 
+            => CreateResponse(() => this.cartService.Share(cartOwnerId, cartRecipientId));
+
+        private Response<T> CreateResponse<T>(Func<T> execute)
         {
-            Response<CheckOutResultDto> response = new Response<CheckOutResultDto>();
+            var response = new Response<T>();
             try
             {
-                response.Object = this.cartService.CheckOut(customerId);
+                response.Object = execute();
             }
             catch (Exception ex)
             {
-                //log error
                 response.Errored = true;
                 response.ErrorMessage = ex.Message;
             }
+
             return response;
         }
-
     }
 }

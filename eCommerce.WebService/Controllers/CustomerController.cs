@@ -1,10 +1,6 @@
 ﻿using eCommerce.WebService.Models;
 using eCommerce.ApplicationLayer.Customers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace eCommerce.WebService.Controllers
@@ -16,6 +12,7 @@ namespace eCommerce.WebService.Controllers
      * http://localhost:50300/api/customer/IsEmailAvailable?email=smith.john@microsoft.com
      * http://localhost:50300/api/customer/RemoveById/5D5020DA-47DF-4C82-A722-C8DEAF06AE23
      * http://localhost:50300/api/customer/update?id=5D5020DA-47DF-4C82-A722-C8DEAF06AE23&Email=smith.john@microsoft.com
+     * http://localhost:50300/api/customer/add?FirstName=Eddy&LastName=Carmine&Email=e@as.com&countryId=229074bd-2356-4b5a-8619-cdebba71cc21
      */
     public class CustomerController : ApiController
     {
